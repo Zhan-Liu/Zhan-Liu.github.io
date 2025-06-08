@@ -50,6 +50,11 @@ site:
       href: /project
       svg: "material-symbols:code-blocks-outline"
       target: _self
+    - id: memory
+      text: Memory
+      href: /memory
+      target: _blank # 在新标签页打开
+      svg: "material-symbols:mode-cool"
     - id: friend
       text: Friend
       href: /friend
@@ -60,12 +65,13 @@ site:
       href: "mailto:contact.evesunmaple@outlook.com"
       target: _blank # 在新标签页打开
       svg: "material-symbols:attach-email-outline-rounded"
+    
 
 # 用户的个人信息
 user:
   name: EveSunMaple # 用户名
   site: "https://frosti.saroprock.com" # 用户的网站链接
-  avatar: /profile.png # 用户头像路径
+  avatar: /homeprofile.png # 用户头像路径
   sidebar: # 侧边栏配置
     social:
       - href: "https://afdian.com/a/saroprock" # 链接
