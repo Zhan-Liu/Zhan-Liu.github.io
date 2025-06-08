@@ -15,7 +15,7 @@ import { remarkReadingTime } from "./src/plugins/remark-reading-time.mjs";
 
 // https://astro.build/config
 export default defineConfig({
-  site: USER_SITE,
+  site: 'https://Zhan-Liu.github.io', // 替换为您的实际用户名
   output: "static",
   style: {
     scss: {
