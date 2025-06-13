@@ -4,7 +4,7 @@ description: 珞珈山下
 pubDate: 06 08 2025
 image: /image/whu-time-1.png
 categories:
-  - Documentation
+  - Memory
 tags:
   - 毕业回忆
   - WHU
@@ -13,6 +13,11 @@ tags:
 ---
 
 ## Introduction
+哈哈哈 $i\hbar \partial_t\ket{\psi}=\hat{H}\ket{\psi}$ 薛定谔方程 啦啦啦
+
+$$\delta S=0$$
+
+Least action principle. 
 
 One of the essential features of any blog is the ability for readers to engage with your content through comments. While Frosti provides an excellent foundation for your Astro-based blog, adding a comment system requires a few additional steps. This guide will walk you through integrating the Waline comment system into your Frosti blog.
 
