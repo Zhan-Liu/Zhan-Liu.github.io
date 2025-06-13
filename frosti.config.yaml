@@ -44,17 +44,17 @@ site:
           href: /blog/category/Examples
           svg: "material-symbols:deployed-code-outline"
           target: _self
+        - id: Memory
+          text: Memory
+          href: /blog/category/Memory
+          svg: "material-symbols:deployed-code-outline"
+          target: _self
         # 子菜单项配置
     - id: project
       text: Project
       href: /project
       svg: "material-symbols:code-blocks-outline"
       target: _self
-    - id: memory
-      text: Memory
-      href: /memory
-      target: _blank # 在新标签页打开
-      svg: "material-symbols:mode-cool"
     - id: friend
       text: Friend
       href: /friend
@@ -65,7 +65,6 @@ site:
       href: "mailto:contact.evesunmaple@outlook.com"
       target: _blank # 在新标签页打开
       svg: "material-symbols:attach-email-outline-rounded"
-    
 
 # 用户的个人信息
 user:

@@ -1,0 +1,59 @@
+---
+import BaseLayout from "@layouts/BaseLayout.astro";
+import License from "@components/widgets/License.astro";
+import PostInfo from "@components/widgets/PostInfo.astro";
+import PostFilter from "@components/widgets/PostFilter.astro";
+import { type CollectionEntry, getCollection } from "astro:content";
+import dayjs from "@utils/dayjs";
+import { DATE_FORMAT } from "@config";
+import MainCard from "@/components/MainCard.astro";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("memory");
+  return posts.map((memory: { slug: any }) => ({
+    params: { slug: memory.slug },
+    props: { memory },
+  }));
+}
+interface Props {
+  memory: CollectionEntry<"memory">;
+}
+
+const { memory } = Astro.props;
+const { Content, remarkPluginFrontmatter, headings } = await memory.render();
+const displayDate = memory.data.pubDate ? dayjs(memory.data.pubDate).format(DATE_FORMAT) : "";
+---
+
+<BaseLayout title={memory.data.title} image={memory.data.image} headings={headings} showTOC={true}>
+  <MainCard title={memory.data.title} description={memory.data.description} image={memory.data.image} infoIcon="lucide:info">
+    <!-- Article info using PostInfo component -->
+    <PostInfo
+      pubDate={displayDate}
+      badge={memory.data.badge}
+      word={remarkPluginFrontmatter.totalCharCount}
+      time={remarkPluginFrontmatter.readingTime}
+    />
+
+    <!-- Categories and tags using PostFilter component -->
+    <div class="mb-6">
+      <PostFilter categories={memory.data.categories} tags={memory.data.tags} />
+    </div>
+
+    <!-- Article Content -->
+    <div class="mt-8">
+      <div id="content" class="prose max-w-none prose-headings:scroll-mt-20 prose-img:rounded-xl prose-img:mx-auto">
+        <Content />
+        <License
+          title={memory.data.title}
+          image={memory.data.image}
+          pubDate={memory.data.pubDate}
+          badge={memory.data.badge}
+          categories={memory.data.categories}
+          tags={memory.data.tags}
+          word={remarkPluginFrontmatter.totalCharCount}
+          time={remarkPluginFrontmatter.readingTime}
+        />
+      </div>
+    </div>
+  </MainCard>
+</BaseLayout>
