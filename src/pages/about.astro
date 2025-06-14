@@ -7,9 +7,8 @@ import GitHubStats from "@/components/mdx/GitHubStats.astro";
 
 <BaseLayout title="About">
   <MainCard
-    title="About SunMaple"
-    description="Developer, open-source enthusiast, and creator of the Frosti blog theme."
-    textOverlay="ABOUT"
+    title="About Me"
+    description=""
     infoIcon="lucide:user"
   >
     <div class="space-y-10 mb-8">
@@ -19,44 +18,19 @@ import GitHubStats from "@/components/mdx/GitHubStats.astro";
           <div
             class="w-32 h-32 md:w-40 md:h-40 rounded-xl ring ring-primary ring-offset-base-100 ring-offset-2 overflow-hidden"
           >
-            <img src="https://github.com/EveSunMaple.png" alt="SunMaple" width="160" height="160" loading="eager" />
+            <img src="src/assets/About_me.jpg" alt="About_me_picture" width="160" height="160" loading="eager" />
           </div>
         </div>
 
         <div class="flex-1 text-center md:text-left">
-          <h1 class="text-3xl md:text-4xl font-bold mb-2">SunMaple</h1>
-          <p class="text-xl text-base-content/80 mb-4">Developer & Open-Source Enthusiast</p>
-
-          <div class="flex flex-wrap gap-3 justify-center md:justify-start mb-6">
-            <a
-              href="https://github.com/EveSunMaple"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="btn btn-sm btn-outline gap-2"
-            >
-              <Icon name="lucide:github" class="w-4 h-4" />
-              <span>GitHub</span>
-            </a>
-            <a
-              href="https://twitter.com/EveSunMaple"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="btn btn-sm btn-outline gap-2"
-            >
-              <Icon name="lucide:twitter" class="w-4 h-4" />
-              <span>Twitter</span>
-            </a>
-            <a href="mailto:evesunmaple@outlook.com" class="btn btn-sm btn-outline gap-2">
-              <Icon name="lucide:mail" class="w-4 h-4" />
-              <span>Email</span>
-            </a>
-          </div>
-
+          <h1 class="text-3xl md:text-4xl font-bold mb-2">Zhan  Liu</h1>
+          <p class="text-xl text-base-content/80 mb-4">Condensed Matter Theory & non-Hermitian Physics</p>
           <p class="text-base-content/80">
-            Hello! I'm SunMaple, a passionate developer focused on creating elegant, responsive, and efficient web
-            applications. I'm the creator of the Frosti blog theme, a modern Astro-based theme for content creators. I
-            love contributing to open-source projects and building tools that help others create beautiful digital
-            experiences.
+            Now I'm an undergraduate student in Wuhan University (WHU) majoring in physics. And I will persue my Ph.D.
+            degree in Institute of physics, Chinese Acadamy of Science (IOP,CAS)  studying theoretical physics,
+            especially in condensed matter thoery and quantum many body physics. Actually, initially I focus on
+            non-Hermitian physics in WHU and have done a lot of work about non-Hermitian Bloch Oscillation both in
+            theory and acoustic crystal experinments. But now my first project in IOP is about novel magnetism.
           </p>
         </div>
       </section>
@@ -64,37 +38,82 @@ import GitHubStats from "@/components/mdx/GitHubStats.astro";
       <!-- GitHub Stats -->
       <section>
         <h2 class="text-2xl font-bold mb-6 flex items-center gap-2">
-          <Icon name="lucide:github" class="w-6 h-6 text-primary" />
-          <span>GitHub Statistics</span>
+          <Icon name="lucide:sprout" class="w-6 h-6 text-primary" />
+          <span>Research Experience</span>
         </h2>
+        <h3 class="text-xl font-bold mb-6 flex items-center gap-2">
+           <span>non-Hermitian Physics</span>
+        </h3>
+        <ol class="text-base-content/80 mb-6 list-decimal pl-4">
+          <li>
+            <strong>non-Hermitian Bloch Oscillation</strong><br>
+            We investigate the Bloch Oscillation (BO) in non-Hermitian Hatano-Nelson (HN) model. The non-reciprocal hoppings in HN model 
+            can lead to non-Hermitian skin effect (NHSE) while electric field will lead to Wannier-Strak localization (WSL). The competition 
+            between them will enrich wavepacket dynamics such as asymmetric Bloch oscillation and some novel edge dynamics. We derive 
+            the semiclassical equaitons of motion to describe wavepacker dynamics and have observed these
+            phenomena in acoustic lattices.
+          </li>     
+          <li>
+            <strong>Chiral Landau-Zener Tunneling</strong><br>
+            Wannier-Stark exceptional points (EPs) in non-Hermtian SSH model under a uniform electric field can induce chiral Landau-Zener 
+            tunneling, which has a tight relation with Floquet EPs (Longhi, PRL, 2022). We design the acoustic lattice to experimentally 
+            demonstrate such effect.
+          </li>      
+          <li>
+            <strong>Twinkling Bloch Oscillation</strong><br>
+            We considered BO in anti-Hermitian HN lattices. The purely imaginary band due to anti-Hermicity can give a zero group velocity, 
+            which will freeze the motion in real space. However, the nonzero imaginary part of spectrum gives a normalizaiton oscillation like 
+            twinkling stars visually. We have observed TBO in acoustic lattices. And this effect can be extended to long-range coupling system to 
+            obtain what we name "pseudo-fractional" Bloch oscillation. 
+          </li>    
+        </ol>
 
-        <GitHubStats username="EveSunMaple" showLanguages={false} showCommitGraph={true} />
+        <h3 class="text-xl font-bold mb-6 flex items-center gap-2">
+           <span>Condensed Matter Experiment</span>
+        </h3>
+        <ol class="text-base-content/80 mb-6 list-decimal pl-4">
+           <li>
+            <strong>Spin Polarized STM Tips</strong><br>
+            In the summer of 2023 I conducted summer research at Fudan University in Yuanbo Zhang's group. My major work is to 
+            make a spin-polarized STM tips to probe magnetic properties of materials by vapor-depositing Cr atoms on the tungsten needle tips.
+            However I spent lots of time on SolidWorks to design structure of tip-holder. After that summer I convience myself that I don't like 
+            such experiments.
+          </li>    
+        </ol>
+
+        <h3 class="text-xl font-bold mb-6 flex items-center gap-2">
+           <span>Condensed Matter Theory</span>
+        </h3>
+        <ol class="text-base-content/80 mb-6 list-decimal pl-4">
+           <li>
+            <strong>Magnetism</strong><br>
+            Now I'm studying some novel magnetism in materials, which is also my undergraduate thesis. 
+          </li>    
+          <li>
+            <strong>non-Hermitian effects in real materials?</strong><br>
+            I also hope to find some non-Hermitian effects in true materials, not just in artifical meta-materials (photonic/phononic crystals, circuits et.cl).
+          </li> 
+        </ol>
       </section>
 
       <!-- Tech Stack -->
       <section>
         <h2 class="text-2xl font-bold mb-6 flex items-center gap-2">
-          <Icon name="lucide:code-2" class="w-6 h-6 text-primary" />
-          <span>Tech Stack</span>
+          <Icon name="lucide:wand" class="w-6 h-6 text-primary" />
+          <span>Tools</span>
         </h2>
 
         <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
           {
             [
-              { name: "Astro", icon: "simple-icons:astro", color: "oklch(0.5 0.2 300)" },
-              { name: "JavaScript", icon: "simple-icons:javascript", color: "oklch(0.8 0.2 80)" },
-              { name: "TypeScript", icon: "simple-icons:typescript", color: "oklch(0.6 0.2 250)" },
-              { name: "React", icon: "simple-icons:react", color: "oklch(0.7 0.2 200)" },
-              { name: "Node.js", icon: "simple-icons:nodedotjs", color: "oklch(0.7 0.2 140)" },
-              { name: "TailwindCSS", icon: "simple-icons:tailwindcss", color: "oklch(0.6 0.2 220)" },
-              { name: "HTML5", icon: "simple-icons:html5", color: "oklch(0.7 0.2 30)" },
-              { name: "CSS3", icon: "simple-icons:css3", color: "oklch(0.7 0.2 220)" },
-              { name: "Git", icon: "simple-icons:git", color: "oklch(0.7 0.2 30)" },
-              { name: "C++", icon: "simple-icons:cplusplus", color: "oklch(0.6 0.2 240)" },
-              { name: "C#", icon: "simple-icons:csharp", color: "oklch(0.6 0.2 160)" },
+              { name: "Overleaf", icon: "simple-icons:overleaf", color: "oklch(0.7 0.2 140)" },
+              { name: "Mathematica", icon: "simple-icons:wolframmathematica", color: "oklch(0.6 0.2 30)" },
+              { name: "Arxiv", icon: "simple-icons:arxiv", color: "oklch(0.5 0.2 30)" },
+              { name: "Bilibili University", icon: "simple-icons:bilibili", color: "oklch(0.7 0.2 220)" },
               { name: "Python", icon: "simple-icons:python", color: "oklch(0.7 0.2 250)" },
+              { name: "ChatGPT", icon: "simple-icons:openai", color: "oklch(0 0.2 250)" },
             ].map((tech) => (
-              <div class="flex flex-col items-center justify-center p-4 bg-base-200 rounded-lg hover:bg-base-300 transition-colors">
+              <div class="flex flex-col items-center justify-center p-4 bg-base-200 rounded-lg hover:bg-base-300 transition-colors text-center">
                 <div class="text-3xl mb-2" style={`color: ${tech.color}`}>
                   <Icon name={tech.icon} class="w-10 h-10" />
                 </div>
@@ -108,8 +127,8 @@ import GitHubStats from "@/components/mdx/GitHubStats.astro";
       <!-- Contribution Activity -->
       <section>
         <h2 class="text-2xl font-bold mb-6 flex items-center gap-2">
-          <Icon name="lucide:activity" class="w-6 h-6 text-primary" />
-          <span>Recent Activity</span>
+          <Icon name="lucide:paw-print" class="w-6 h-6 text-primary" />
+          <span>Footprint</span>
         </h2>
 
         <div class="bg-base-200 rounded-xl p-6 overflow-x-auto">
@@ -117,24 +136,219 @@ import GitHubStats from "@/components/mdx/GitHubStats.astro";
             {
               [
                 {
+                  date: "August 2018",
+                  title: "高中开学啦",
+                  desc: "与成武一中的第一面，见到了老耿。嘉琦是我同桌，还有芃芃，我们的故事刚刚开始",
+                },
+                {
+                  date: "July 2019",
+                  title: "第一次竞赛培训",
+                  desc: "老耿带着我们十来个人在济南喝了好几天的单县羊肉汤，这是第一次出远门，和嘉琦芃芃住在一起",
+                },
+                {
+                  date: "August 2019",
+                  title: "高一暑假在菏泽补课",
+                  desc: "重新分班了，不过很多人都还在，在菏泽玩得不错，就是没学什么东西",
+                },
+                {
+                  date: "January 2020",
+                  title: "高二寒假竞赛培训",
+                  desc: "这次老耿没来，在济南的时候已经有疫情了，在武汉封城的当天下午回到了家。"
+                },
+                {
+                  date: "August 2020",
+                  title: "高二暑假竞赛培训",
+                  desc: "和嘉琦还有向阳一起去的济南，老耿去了几天就不见了。记得陈向阳买了老干妈就馍吃，然后老耿就带我们下馆子了，哈哈哈"
+                },
+                {
+                  date: "September 2020",
+                  title: "高三开学啦",
+                  desc: "换了一批老师，老耿也不教我们了，但是老田来了，那些天很失落，我们还去耿老师家请老师回来......"
+                },
+                {
+                  date: "September 2020",
+                  title: "物理竞赛考试",
+                  desc: "和嘉琦还有向阳去历城二中考试，张顺老师带队，竞赛名额还是耿老师从菏泽一中要过来的......"
+                },
+                {
+                  date: "November 2020",
+                  title: "高三全市联考",
+                  desc: "经历了高二的稍许低谷，这是我找回自信的开始"
+                },
+                {
+                  date: "February 2021",
+                  title: "除夕夜的复习",
+                  desc: "在老家，每年除夕我都通宵，那年除夕我看了一晚上的化学笔记"
+                },
+                {
+                  date: "May 2021",
+                  title: "高考临近",
+                  desc: "夏日的气息渐浓，只记得吃过饭后的打打闹闹和一次偶然的晚霞，还有做不完的卷子和晚自习的讨论"
+                },
+                {
+                  date: "June 2021",
+                  title: "高考",
+                  desc: "跟做梦一样考了四天之后，我们也与成武一中挥手告别。我将永远记得红色校服，十八班，小花园，孔子像......"
+                },
+                {
+                  date: "June 2021",
+                  title: "出高考成绩",
+                  desc: "心里没什么波澜，只记得查成绩时电脑屏保上写着，“不要垂头丧气，即使失去一切，明天仍在你的手里。”"
+                },
+                {
+                  date: "July 2021",
+                  title: "填报志愿",
+                  desc: "一门心思想学物理，于是顶着压力前面的志愿全填的物理"
+                },
+                {
+                  date: "July 2021",
+                  title: "录取通知",
+                  desc: "七月下旬，我收到了武汉大学弘毅学堂的录取通知，与珞珈山正式结缘，憧憬而又紧张"
+                },
+                {
+                  date: "September 2021",
+                  title: "你好，WHU",
+                  desc: "与武汉大学的第一面，只记得天气很热，我带着两个行李箱和一个包跟走迷宫似的来到了宿舍。殊不知，那天的那条路，这四年不知走了多少次"
+                },
+                {
+                  date: "September 2021",
+                  title: "WHU的第一课",
+                  desc: "第一节课是在教五上的，李大美老师的高等数学，还是早八。（当时我竟然能起得来）"
+                },
+                {
+                  date: "December 2021",
+                  title: "第一个期末周和寒假",
+                  desc: "只记得化学原理学了好久，线性代数做了好多题，生物也背了好多果子。但是一想到下个学期就要学物理了非常激动"
+                },
+                {
+                  date: "February 2022",
+                  title: "元宵节开学",
+                  desc: "开学当天参加了弘毅的元宵游园会，捏了只小老虎。回到宿舍难得空闲很心安，第二天上午是在计院上的肖孟老师的电磁学，下午是英语和高数"
+                },
+                {
+                  date: "March 2022",
+                  title: "CUPT",
+                  desc: "在石院长的鼓励下和齐良骏、王云睿参加了CUPT。没怎么正经学过竞赛的我只能尽力加油。第一个题目是橡皮筋上的球，第二个题目是等势线，我们逐渐熟络。"
+                },
+                {
+                  date: "August 2022",
+                  title: "Painful Time",
+                  desc: "这是一段痛苦的时光，但是感谢芃芃和嘉琦的陪伴"
+                },
+                {
+                  date: "November 2022",
+                  title: "疫情封寝",
+                  desc: "封寝的这段日子难得心安，完成了光学关于超构表面的课程小论文，当时的我还没意识到，我之后一两年的科研将与这个领域有关。"
+                },
+                {
+                  date: "December 2022",
+                  title: "解封回家",
+                  desc: "宿舍解封之后，上了几天课，期末考试推迟到了下学期开学，考完数理方法的月考之后就回家了"
+                },
+                {
+                  date: "January 2023",
+                  title: "成武一中，好久不见",
+                  desc: "一月三日，芃芃阳了刚好，我俩回到了一中宣讲（主要是为了陪他），并回去看望化学老师。希望成武一中高考顺利！"
+                },
+                {
+                  date: "February 2023",
+                  title: "暖冬",
+                  desc: "经历了Painful time后，那个冬日反而没那么寒冷了，芃芃，嘉琦等朋友的陪伴，蓝水湾的风筝，芃芃做的饭菜，徒步周自齐公园，以及奶茶店的欢笑让那个冬日封神。"
+                },
+                {
+                  date: "March 2023",
+                  title: "初入课题组",
+                  desc: "加入了邱春印老师的课题组，跟着冯希凌师兄做非厄米布洛赫振荡。当然，一开始组会啥的都听不懂，慢慢来。"
+                },
+                {
+                  date: "June 2023",
+                  title: "NUS, Singpore",
+                  desc: "和同学一起去了新加坡参加NUS的暑期学校，物理系的氛围真好，课程有趣且生动，上课之余逛了新加坡，肉骨茶很好喝"
+                },
+                {
+                  date: "July 2023",
+                  title: "嘉琦家的烧烤",
+                  desc: "和王嘉琦刘子芃白天在我家画了画看了电影，晚上去嘉琦家吃烧烤，还遇到两只可可爱爱的小狗狗，喂它们喝了大窑"
+                },
+                {
+                  date: "August 2023",
+                  title: "四个人的复旦一月游",
+                  desc: "在复旦的张远波组做暑期科研，除了齐良骏和王云睿之外，还认识了徐毅豪，四个人开始了王者峡谷之旅，并将持续至今"
+                },
+                {
+                  date: "November 2023",
+                  title: "非厄米准晶",
+                  desc: "在物院门口溜达时突然想到或许非厄米准晶中存在局域与趋肤的竞争，但是遗憾的是一些简单的理论和实验已经被做过了"
+                },
+                {
                   date: "January 2024",
-                  title: "Open Source Contributions",
-                  desc: "Contributed to several open source projects, focusing on performance optimizations.",
+                  title: "Party King",
+                  desc: "难得的心安时光。四个人玩了一天，打了台球和保龄球，以及一下午麻将。第二天去吃了海底捞，给王云睿去美国送行。（没想到的是，一年半以后，我们依旧在海底捞给他送行）"
                 },
                 {
                   date: "March 2024",
-                  title: "Initiated Frosti Project",
-                  desc: "Started development of the Frosti blog theme for Astro, focusing on modern design principles.",
+                  title: "生日快乐！",
+                  desc: "很惊喜，能收到大家的生日蛋糕，这是我在大学第一次吃的生日蛋糕。"
+                },
+                {
+                  date: "May 2024",
+                  title: "夏令营，开启！",
+                  desc: "一段压力很大的日子，害怕没学上，害怕入不了营，害怕拿不到优营......和同学日常焦虑......"
+                },
+                {
+                  date: "June 2024",
+                  title: "物理所的offer",
+                  desc: "2024年6月7日，物理所在武大的定点面试，我通过了。听到消息的那一刻，耳边的欢呼声渐渐模糊，回忆起这些年的点点滴滴，竟有些想哭"
                 },
                 {
                   date: "July 2024",
-                  title: "Released Frosti v2",
-                  desc: "Published version 2 with improved responsive design and extended plugin support.",
+                  title: "拒了清北，选择物理所",
+                  desc: "随后七月份的清北夏令营，我如愿都拿到了offer，那天晚上四个人的火锅涮肉很好吃。最后我依旧选择了物理所，算是执念吧，或许我心中早就有了答案"
+                },
+                {
+                  date: "August 2024",
+                  title: "“买苹果喽~”",
+                  desc: "难得的清闲时光，我去嘉琦家帮忙卖苹果，中午吃了碗凉面条，好吃~一天没卖出去多少，临走我还顺走一袋苹果"
+                },
+                {
+                  date: "November 2024",
+                  title: "初识磁性",
+                  desc: "和老师交流了一下毕业论文的想法，最后定下来的是关于磁性的，至此，我进入了非厄米和磁性的过渡期，一边进行TBO的实验，一边进行磁性的学习"
+                },
+                {
+                  date: "December 2024",
+                  title: "武汉相聚！",
+                  desc: "嘉琦来武汉旅游了。我们一起逛了校园，喝了樱顶的咖啡，吃了披萨，去了江边，过了早，去了东湖，江汉路，省博和晴川阁。"
+                },
+                {
+                  date: "January 2025",
+                  title: "Wilzeck's Lectures",
+                  desc: "在上交听了诺奖得主Frank Wilzeck的讲座，还要到了合照"
+                },
+                {
+                  date: "February 2025",
+                  title: "Bad time......",
+                  desc: "这又是一段hard time"
                 },
                 {
                   date: "March 2025",
-                  title: "Released Frosti v3",
-                  desc: "Launched version 3 of the Frosti blog theme with enhanced performance and new customization options.",
+                  title: "光与暗之舞",
+                  desc: "来到了物理所，在办公室难得心安，可以安心科研。但是偶尔又会失落，感谢嘉琦，刘飞和大哥的陪伴，每个周末和假期都安心而温暖。我仿佛在光亮和黑暗中来回挣扎"
+                },
+                {
+                  date: "April 2025",
+                  title: "彻夜共鸣",
+                  desc: "大体完成了毕业论文，四月六日在奥森公园野餐。那晚的彻夜长谈我将记得，直面伤口后或许治愈地更快。之后的郁金香也很美，颜色鲜艳地要滴下来。"
+                },
+                {
+                  date: "May 2025",
+                  title: "WHU，我回来了",
+                  desc: "在物理所待了两个月完成毕业论文之后，我回到了武大，开始珍惜这最后的时光。五月十一日通过了答辩，之后去深圳参加了超材料大会，算是为本科科研画上句号。"
+                },
+                {
+                  date: "June 2025",
+                  title: "与子同袍",
+                  desc: "我们一起穿上了学士服拍照，并送别王云睿去美国。此时我才意识到，WHU足以让我心安，我也开始搭建这个网站来记录这里的时光。"
                 },
               ].map((item, i) => (
                 <div class="relative flex gap-4 pb-2 md:pb-0 md:min-w-[250px]">

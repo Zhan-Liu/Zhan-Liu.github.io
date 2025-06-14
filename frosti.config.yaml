@@ -1,10 +1,10 @@
 # 网站的基本信息
 site:
   tab: LittleWorld # 浏览器标签栏上显示的文本
-  title: 💠 LittleWorld # 网站的标题
+  title: ❄️ LittleWorld # 网站的标题
   description: Welcome to my little world! # 网站的描述，用于SEO等
   language: en # 网站的语言，例如 "en" 是英文
-  favicon: /snow_60(1) # 网站的图标，用于浏览器标签栏和其他地方显示
+  favicon: /snow_60(1).png # 网站的图标，用于浏览器标签栏和其他地方显示
   theme: # 更多主题 https://daisyui.com/docs/themes/
     light: winter # 主题的浅色模式
     dark: dracula # 主题的深色模式
@@ -68,33 +68,25 @@ site:
 
 # 用户的个人信息
 user:
-  name: EveSunMaple # 用户名
+  name: Zhan Liu # 用户名
   site: "https://frosti.saroprock.com" # 用户的网站链接
-  avatar: /homeprofile.png # 用户头像路径
+  avatar: /profile_whu.jpg # 用户头像路径
   sidebar: # 侧边栏配置
     social:
-      - href: "https://afdian.com/a/saroprock" # 链接
-        ariaLabel: Support my work # 图标的可访问性标签
-        title: Support my work # 图标的悬浮标题
-        svg: "ri:cup-line"
-      - href: "https://github.com/EveSunMaple"
-        ariaLabel: Github
-        title: Github
-        svg: "ri:github-line"
-      - href: "https://space.bilibili.com/438392347"
-        ariaLabel: BiliBili
-        title: BiliBili
-        svg: "ri:bilibili-line"
-      - href: "https://x.com/EveSunMaple"
-        ariaLabel: X(twitter)
-        title: X(twitter)
-        svg: "ri:twitter-line"
+      - ariaLabel: Github
+        title: Lattice everyday!
+        svg: "material-symbols:activity-zone-outline"
+      - ariaLabel: BiliBili
+        title: Snow~Snow~
+        svg: "material-symbols:ac-unit-rounded"
+      - ariaLabel: BiliBili
+        title: Honeycomb or graphene?
+        svg: "material-symbols:hive-outline-rounded"
+      - ariaLabel: BiliBili
+        title: Sunshine means hope
+        svg: "material-symbols:light-mode-rounded"
   footer:
     social:
-      - href: "https://afdian.com/a/saroprock" # 链接
-        ariaLabel: Support my work # 图标的可访问性标签
-        title: Support my work # 图标的悬浮标题
-        svg: "ri:cup-line"
       - href: "https://github.com/EveSunMaple"
         ariaLabel: Github
         title: Github
