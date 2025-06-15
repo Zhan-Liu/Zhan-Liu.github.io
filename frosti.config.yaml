@@ -50,10 +50,10 @@ site:
           svg: "lucide:snowflake"
           target: _self
         # 子菜单项配置
-    - id: project
-      text: Project
-      href: /project
-      svg: "material-symbols:code-blocks-outline"
+    - id: publication
+      text: Publication
+      href: /publication
+      svg: "material-symbols:wand-stars-outline"
       target: _self
     - id: friend
       text: Friend
@@ -81,7 +81,7 @@ user:
         svg: "material-symbols:ac-unit-rounded"
       - ariaLabel: BiliBili
         title: Honeycomb or graphene?
-        svg: "material-symbols:hive-outline-rounded"
+        svg: "material-symbols:hive"
       - ariaLabel: BiliBili
         title: Sunshine means hope
         svg: "material-symbols:light-mode-rounded"

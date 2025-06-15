@@ -1,0 +1,39 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { Icon } from "astro-icon/components";
+import MainCard from "@/components/MainCard.astro";
+import GitHubStats from "@/components/mdx/GitHubStats.astro";
+import RepositoryCard from "@/components/mdx/RepositoryCard.astro";
+---
+
+<BaseLayout title="Publications">
+  <MainCard
+    title="Publications"
+    description="Published Paper"
+    infoIcon="lucide:code-2"
+  >
+    <!-- Featured Projects -->
+    <section class="py-4">
+      <h2 class="text-2xl font-bold mb-6 flex items-center gap-2">
+        <Icon name="lucide:bookmark" class="w-6 h-6 text-primary" />
+        <span>non-Hermitian Physics</span>
+      </h2>
+      <ol class="text-base-content/80 mb-6 list-decimal pl-4">   
+        <li>
+         I hope two papers about non-Hermitian Bloch oscillation will be published soon......
+        </li>
+      </ol>
+      
+    </section>
+
+    <!-- My Repositories -->
+     <section class="py-4">
+      <h2 class="text-2xl font-bold mb-6 flex items-center gap-2">
+        <Icon name="lucide:bookmark" class="w-6 h-6 text-primary" />
+        <span>Magnetism</span>
+      </h2>
+      <ol class="text-base-content/80 mb-6 list-decimal pl-4">   
+      </ol>      
+    </section>
+  </MainCard>
+</BaseLayout>
