@@ -1,0 +1,147 @@
+---
+title: non-Hermitian Hatano-Nelson Model
+description: Complex energy specteum, winding number and skin effect in HN model. 
+pubDate: 06 15 2025
+image: /image/hnmodel.png
+categories:
+  - Physics
+  - Codes
+tags:
+  - non-Hermitian
+  - winding number
+  - MATLAB-codes
+---
+
+import Collapse from "../../components/mdx/Collapse.astro";
+import Diff from "../../components/mdx/Diff.astro";
+import Error from "../../components/mdx/Error.astro";
+import Info from "../../components/mdx/Info.astro";
+import Kbd from "../../components/mdx/Kbd.astro";
+import Success from "../../components/mdx/Success.astro";
+import Warning from "../../components/mdx/Warning.astro";
+import TimeLine from "../../components/mdx/TimeLine.astro";
+import LinkCard from "../../components/mdx/LinkCard.astro";
+
+## 1 非厄米Hatano-Nelson (HN) 模型
+考察HN模型的哈密顿量，
+
+$$H=\sum_{j} (t_r \hat{c}^{\dagger}_{j+1}\hat{c}_{j}+t_l \hat{c}^{\dagger}_{j}\hat{c}_{j+1})$$
+
+一般地，$t_l\neq t_r$，哈密顿量是非厄米的，这描述的是一个单原子链，其左右的耦合不等。于是一个直观的想法就是其中的态会趋向于一边，后面
+我们会看到，这就是非厄米趋肤效应(non-Hermitian skin effect, NHSE)。
+
+我们可以先回忆在厄米系统中的一个常用的结论，即在热力学极限下，系统开边界的能谱和周期边界的能谱是差不多的。然而，在非厄米系统中这
+将失效，系统的OBC谱与PBC谱哪怕在热力学极限下也会有很大的不同。相应地，系统OBC和PBC的本征态也将完全不同。
+
+为了直观地感受这一点，我们可以先得到数值上的非厄米HN模型的OBC和PBC谱，以及相应的本征态分布。
+
+## 2 非厄米HN模型的能谱与本征态
+### 数值结果
+![Alt text](/image/NHSE_HNmodel.png)
+### Winding number and NHSE
+按照下面的MATLAB代码我们可以轻松得到开放边界下的本征态与能谱。可以发现，当$t_l$较大时态局域在左边界，当$t_r$较大时态局域在右边界，即存在趋肤效应，这与我们
+前面的直觉相符。并且可以发现这里OBC的能谱是纯实的，并被PBC的谱所包围，即这里的谱是有winding的。而趋肤效应作为一种边界效应，可否被winding number描述呢？
+
+The answer is yes! 通过将HN模型的哈密顿量变换到动量空间，可以得到PBC下的能谱为
+
+$E_{PBC}(k)=t_r e^{-ik}+t_l e^{ik}\equiv t_r\dfrac{1}{\beta}+t_l\beta$
+
+从而，定义winding number
+
+$w=\dfrac{1}{2\pi}\oint {\dfrac{d}{d\beta}\arg{[E(\beta)-E_0]}d\beta}$
+
+积分为k绕一圈。我们当然可以解析地算出上面两种趋肤方向对应的winding number，但是观察到上式的意义为PBC的谱绕参考点$E_0\in\mathbb{C}$环绕的圈数，
+对于$E_0\in E_{OBC}$，当$t_l>t_r$时PBC绕其逆时针环绕，$w=+1$，表现为左趋肤；而$t_r>t_l$时顺时针绕圈，$w=-1$，表现为右趋肤。
+
+于是我们可以建立PBC的winding number与OBC下趋肤方向的对应关系并从PBC谱预言OBC下的趋肤方向：
+|Skin effect | Winding number |
+|------------|----------------|
+|   Left     |   $w=+1$       |
+|  Right     |   $w=-1$       |
+## 3 长程耦合的HN模型的双极趋肤
+基于上面的讨论，一个自然的问题是，是否存在一个体系，其中既存在左趋肤又存在右趋肤，即双极趋肤。利用winding的结论，显然一个八字形的能谱将同时
+具有$w=+1$和$w=-1$，从而给出双极趋肤，这可以通过在最一开始的HN模型上加入长程耦合来实现：
+
+$$H=\sum_{j} [(t_r \hat{c}^{\dagger}_{j+1}\hat{c}_{j}+t_l \hat{c}^{\dagger}_{j}\hat{c}_{j+1})+J_r \hat{c}^{\dagger}_{j+2}\hat{c}_{j}+J_l \hat{c}^{\dagger}_{j}\hat{c}_{j+2}]$$
+
+我们依旧可以给出PBC下的能谱$E_{p}=t_re^{-ik}+t_l e^{ik}+J_r e^{-2ik}+J_l e^{2ik}$，并得到OBC下的本征能与本征态。
+![Alt text](/image/dipolar_skin.png)
+【好吧能谱并不是八字形......】可以看到确实存在两个winding的区域，而本征态也确实出现了双极趋肤。但是需要注意的是，其他参数下可能并不会出现两种winding。
+## Appendix: MATLAB Codes
+非厄米HN模型的趋肤效应与复能谱
+```matlab "data_processor"
+% Parameters
+tr=1;    %向左耦合
+tl=0.8;  %向右耦合
+N=100;   %总的格点数
+H_obc=zeros(N,N);
+H_pbc=zeros(N,N);
+
+% OBC Hamiltonians and eigenspectrum
+for j=1:N-1
+    H_obc(j,j+1)=tl;
+    H_obc(j+1,j)=tr;
+end
+[state_obc,energy_obc]=eig(H_obc);      % eigensystem of H_OBC
+energy_obc=diag(energy_obc);            % 本征能
+pro_obc=abs(state_obc).^2;              % 本征态
+
+% PBC Hamiltonians and eigenspectrum
+for j=1:N-1
+    H_pbc(j,j+1)=tl;
+    H_pbc(j+1,j)=tr;
+end
+H_pbc(N,1)=tl;
+H_pbc(1,N)=tr;
+[state_pbc,energy_pbc]=eig(H_pbc);      % eigensystem of H_OBC
+energy_pbc=diag(energy_pbc);            % 本征能
+pro_pbc=abs(state_pbc).^2;              % 本征态
+
+figure(1)
+plot(real(energy_obc),imag(energy_obc),'Ok',LineWidth=2)   %画开边界的复能谱
+hold on
+plot(real(energy_pbc),imag(energy_pbc),'Or',LineWidth=2)
+xlabel('Re(E)')
+ylabel('Im(E)')
+
+figure(2)
+plot(pro_obc,LineWidth=2)
+xlabel('Sites')
+ylabel('|\psi|^2')
+```
+长程HN模型的双极趋肤
+```matlab
+tr=1;    %向左耦合
+tl=0.5;  %向右耦合
+N=100;   %总的格点数
+Jr=1;    %向右的长程耦合
+Jl=1.2;  %向左的长程耦合
+H_obc=zeros(N,N);
+
+for j=1:N-1
+    H_obc(j,j+1)=tl;
+    H_obc(j+1,j)=tr;
+end
+for j=1:N-2
+    H_obc(j+2,j)=Jr;
+    H_obc(j,j+2)=Jl;
+end
+[state_obc,energy_obc]=eig(H_obc);      % eigensystem of H_OBC
+energy_obc=diag(energy_obc);            % 本征能
+pro_obc=abs(state_obc).^2;              % 本征态
+
+k=-pi:0.01:pi;
+energy_pbc=tl.*exp(1i.*k)+tr.*exp(-1i.*k)+Jr.*exp(-2*1i.*k)+Jl.*exp(2*1i.*k);
+
+figure(1)
+plot(real(energy_obc),imag(energy_obc),'Ok',LineWidth=2)   %画开边界的复能谱
+hold on
+plot(real(energy_pbc),imag(energy_pbc),'Or',LineWidth=2)
+xlabel('Re(E)')
+ylabel('Im(E)')
+
+figure(2)
+plot(pro_obc,LineWidth=2)
+xlabel('Sites')
+ylabel('|\psi|^2')
+```
