@@ -4,7 +4,7 @@ site:
   title: ❄️ LittleWorld # 网站的标题
   description: Welcome to my little world! # 网站的描述，用于SEO等
   language: en # 网站的语言，例如 "en" 是英文
-  favicon: /snow_60(1).png # 网站的图标，用于浏览器标签栏和其他地方显示
+  favicon: /snow_60 (1).png # 网站的图标，用于浏览器标签栏和其他地方显示
   theme: # 更多主题 https://daisyui.com/docs/themes/
     light: winter # 主题的浅色模式
     dark: dracula # 主题的深色模式

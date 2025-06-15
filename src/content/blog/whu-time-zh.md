@@ -1,6 +1,6 @@
 ---
-title: 毕业季01：武大时光
-description: 珞珈山下
+title: 毕业季01：Memory，弥梦离——初遇
+description: 与WHU的第一面：2021.09-2022.01
 pubDate: 06 08 2025
 image: /image/whu-time-1.png
 categories:
@@ -12,162 +12,20 @@ tags:
   - 珞珈山
 ---
 
-## Introduction
-哈哈哈 $i\hbar \partial_t\ket{\psi}=\hat{H}\ket{\psi}$ 薛定谔方程 啦啦啦
+## 2021的第二个夏天
+21年七月份收到武大的录取通知后，就在地图上摸索WHU的各个地方，对这个陌生而庞大的校园充满好奇。地图上看物院小小的一栋小楼，也看到了外形奇怪的万林博物馆。不知道在哪听说的梅园小操场会放电影，我就在地图上找梅操的位置，可惜临近毕业了也没能去看上一次。录取通知书来的时候，里面还夹着四张明信片，关于武大的春夏秋冬的景色，当时并不知道，这四张明信片上的建筑将会陪伴我整整四年。春天的鲲鹏广场陪伴我上过统计物理，陪我考过六级；夏天的万林见证了我在教五上的每一节课，以及从实验室回来时的欢喜或忧愁；秋天的珞珈山上总有我们散步的身影，山上的珞珞和珈珈却已不见了行迹；冬日的樱顶和老图已然成为了这里的象征，让大四的我把记忆锚定在这里。
 
-$$\delta S=0$$
+![](/image/whu_mingxinpian.png)
 
-Least action principle. 
+就这样，激动而稍许紧张着，我来到了武汉大学。在报到前一天到的武汉，热得在酒店待了一天，第二天一早拖着两个行李箱和一个大大的包从西门进了学校，坐校车来到了梅园小操场，这是我们报到的地方。领了校园卡和一些小礼品之后，我便导航来到了枫园，我即将生活四年的地方。不愧是武大的地形，导航到了宿舍楼的背后，我需要从枫园的自强超市的楼梯爬上来，之后找宿管阿姨领了水卡，又拖着箱子爬上六楼，608，我的宿舍。我是第一个到宿舍的，天气很热，阳光泼洒在房间里，地板反光有些刺眼，空荡荡的房间里淡黄色的桌子散发着木头的气息。休息了一会，第一个室友也到了，我们随后去逛了校园，不知不觉走到了桂园，自然我在武大的第一顿饭也就在那里吃上了。
 
-One of the essential features of any blog is the ability for readers to engage with your content through comments. While Frosti provides an excellent foundation for your Astro-based blog, adding a comment system requires a few additional steps. This guide will walk you through integrating the Waline comment system into your Frosti blog.
+那天下午我还要去找爸妈拿电脑，因为上午行李太多实在拿不下。一个人导航从宿舍走到了西门，重新翻看一路上拍的照片才发现，我从枫园沿着梅园CBD下去，之后沿着图书馆与万林的小路走到教五草坪，再顺着桂操走到卓尔和西门，算是和将要相处四年的地方打个照面吧。那时的我觉得一切都很新鲜，此时的我却有些羡慕那时的我，四年间竟没怎么好好看看这里就要离开了。那时，家里前两天下了小雨，已经有些秋意了，而我将继续在武汉开启那一年的第二个夏天。
 
-Static sites like those built with Astro don't have built-in comment systems since they lack server-side processing. However, we can use third-party comment services that handle the backend for us, while we integrate their frontend components into our site.
+收拾好床铺和书桌，和室友聊了会天就睡了，那时候睡得真早。第二天是被高中级部主任的电话吵醒的，但是已经忘了什么事了。下午还是晚上是弘毅学堂的新生见面会，我还很认真地带着小本本记笔记，虽然没什么好记的。见到了石院长，初入大学，一切都是那么新鲜，也充满希望。关于开学的那些日子已经记不清了，只能通过些许照片抓取时间的碎片，现在想来那是段无忧无虑的清闲时光。期间班助在枫教开了班会，和班里的同学互相认识了一下，那时感觉枫教好远，却是今后常去的地方。9月5日我在枫园CBD吃了顿饭，那家店可以写一些便利贴贴到墙上，看着那些留言，我当然没有高年级的学生那么感慨，但也写了一张。
 
-## Creating Comment Components in Astro
+## 最初的一页
+9月6日，周一，我在武大上的第一节课是在教五的高等数学，李大美老师来上。只记得课后作业不会做，极限好难学，当时还喊着同学去图书馆写作业，不过没坚持几天。线性代数的行列式也让我摸不着头脑，直到学了线性变换才发现这其中确实有趣。化学原理是全英文的，不过好在经历了新高考的洗礼，除了语言有些问题之外还是比较顺利的，很多东西我早已在高三的模拟题中见到过。那些天感觉每一节课都那么新奇，每天上课下课，回宿舍休息，让人心安。自此，我正式翻开了WHU课程的第一页。
 
-Before diving into a specific comment system, let's understand how to create and use components in Astro. We'll create a reusable component that can be easily added to any page.
+![](/image/whu_firstcourse.png)
 
-### Component Structure
-
-We'll create our comment component in the `src/components/comments` directory. First, let's ensure this directory exists:
-
-```bash
-mkdir -p src/components/comments
-```
-
-## Integrating Waline
-
-[Waline](https://waline.js.org/) is a simple, safe, and feature-rich comment system with backend and frontend separation. It is highly customizable and easy to set up.
-
-### Step 1: Set Up Waline Backend
-
-Before adding Waline to your site, you need to set up the backend:
-
-1. Create a LeanCloud application to store your comments.
-2. Deploy the Waline server to Vercel or another hosting platform.
-
-Follow the [official Waline guide](https://waline.js.org/guide/get-started/) to set up your backend service. After deploying, you'll get a server URL that you will need for the frontend component.
-
-### Step 2: Create the Waline Component
-
-Let's create a reusable Waline component:
-
-```bash
-touch src/components/comments/Waline.astro
-```
-
-Add the following code to this component:
-
-```astro
----
-interface Props {
-  serverURL: string;
-  lang?: string;
-  dark?: string;
-  emoji?: string[];
-  meta?: string[];
-  requiredMeta?: string[];
-  reaction?: boolean;
-  pageview?: boolean;
-}
-
-const {
-  serverURL,
-  lang = "en",
-  dark = "html[data-theme-type='dark']",
-  emoji = ["https://unpkg.com/@waline/emojis@1.1.0/weibo", "https://unpkg.com/@waline/emojis@1.1.0/bilibili"],
-  meta = ["nick", "mail", "link"],
-  requiredMeta = [],
-  reaction = false,
-  pageview = false,
-} = Astro.props;
----
-
-<div id="waline-container"></div>
-
-<link rel="stylesheet" href="https://unpkg.com/@waline/client@v3/dist/waline.css" />
-
-<script
-  type="module"
-  define:vars={{
-    serverURL,
-    lang,
-    dark,
-    emoji,
-    meta,
-    requiredMeta,
-    reaction,
-    pageview,
-  }}
->
-  import { init } from "https://unpkg.com/@waline/client@v3/dist/waline.js";
-
-  let walineInstance;
-
-  async function mountWaline() {
-    if (walineInstance) {
-      await walineInstance.destroy();
-    }
-    walineInstance = init({
-      el: "#waline-container",
-      serverURL,
-      path: location.pathname,
-      lang,
-      dark,
-      emoji,
-      meta,
-      requiredMeta,
-      reaction,
-      pageview,
-    });
-  }
-
-  document.addEventListener("astro:after-swap", () => {
-    mountWaline();
-  });
-
-  document.addEventListener("DOMContentLoaded", () => {
-    mountWaline();
-  });
-</script>
-
-<style>
-  #waline-container {
-    margin-top: 2rem;
-    margin-bottom: 2rem;
-  }
-</style>
-```
-
-### Step 3: Using the Waline Component
-
-You can now use the Waline component in your Astro pages or layouts. Here's how to add it to your blog post template:
-
-```astro
----
-// In your blog post layout file
-import Waline from "../../components/comments/Waline.astro";
-// Other imports and frontmatter...
----
-
-<!-- Your blog post content -->
-<article>
-  <slot />
-</article>
-
-<!-- Add the comment section -->
-<section class="comments">
-  <h2>Comments</h2>
-  <Waline serverURL="https://your-waline-server.vercel.app" />
-</section>
-```
-
-Replace `"https://your-waline-server.vercel.app"` with your actual Waline server URL.
-
-## Troubleshooting
-
-### Common Issues
-
-- **Comments not displaying:** Make sure your `serverURL` is correctly set and accessible.
-- **CSS issues:** Ensure that the Waline stylesheet is properly loaded.
-- **Deployment issues:** If your server is on Vercel, check the environment variables and deployment logs.
+第一个学期的课有些多，但是当时并不觉得有什么。由于物理课在第二个学期，于是最令人激动的便是化学原理实验了。第一个实验是测量鹌鹑蛋的密度（现在想来好幼稚），之后还做了粗盐提纯，硫酸铜单晶的制备，荧光剂制备，以及各种神奇的小实验。高中从没进过实验室的我为此非常着迷，虽然我粗盐提纯的产率只有百分之十，但是
