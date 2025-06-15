@@ -3,6 +3,7 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
 import { Icon } from "astro-icon/components";
 import MainCard from "@/components/MainCard.astro";
 import GitHubStats from "@/components/mdx/GitHubStats.astro";
+import Aboutme_image from '../assets/About_me(1).jpg'; // 确保路径是相对于当前 .astro 文件的正确路径
 ---
 
 <BaseLayout title="About">
@@ -18,7 +19,7 @@ import GitHubStats from "@/components/mdx/GitHubStats.astro";
           <div
             class="w-32 h-32 md:w-40 md:h-40 rounded-xl ring ring-primary ring-offset-base-100 ring-offset-2 overflow-hidden"
           >
-            <img src="src/assets/About_me.jpg" alt="About_me_picture" width="160" height="160" loading="eager" />
+            <img src={Aboutme_image.src} alt="About_me_picture" width="160" height="160" loading="eager" />
           </div>
         </div>
 
