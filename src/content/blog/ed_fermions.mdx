@@ -1,0 +1,294 @@
+---
+title: Exact Diagonalization of Ferminons with Hubbard and Hund's interaction
+description: 费米子体系的精确对角化：步骤以及MATLAB代码
+pubDate: 07 17 2025
+image: /image/Triplets.png
+categories:
+  - Physics
+  - Codes
+tags:
+  - Exact Diagonaliztion
+  - Fermi-Hubbard
+  - MATLAB-codes
+---
+
+import Collapse from "../../components/mdx/Collapse.astro";
+import Diff from "../../components/mdx/Diff.astro";
+import Error from "../../components/mdx/Error.astro";
+import Info from "../../components/mdx/Info.astro";
+import Kbd from "../../components/mdx/Kbd.astro";
+import Success from "../../components/mdx/Success.astro";
+import Warning from "../../components/mdx/Warning.astro";
+import TimeLine from "../../components/mdx/TimeLine.astro";
+import LinkCard from "../../components/mdx/LinkCard.astro";
+
+## 格点上的费米子模型
+考虑一个Lattice，其上填充了一些费米子。格点通过hopping来描述，并外加onsite的Hubbard相互作用（洪特耦合我们后面再考虑）。其哈密顿量可以写成
+
+$$ H=t\sum_{\langle i,j\rangle}c_i^{\dagger}c_j+U\sum_j n_{j\uparrow}n_{j\downarrow}$$
+
+当格点和电子数比较少的时候，我们可以利用精确对角化的办法，显式地写出上述哈密顿量的矩阵，之后直接对角化得到本征值与本征态。但是，除了$n_e=1，2$等很少数的电子的模型，3,4个电子在五六个
+格点上的哈密顿量矩阵纯靠手算是几乎不可能完成的任务。因为考虑总的格点数N，电子数$n_e$的话，系统的单电子态有2N个，于是这些个电子占据的可能情况有$C_{2N}^{n_e}$种可能，即Hilbert空间的维数为
+
+$$dim(H)=C_{2N}^{n_e}=\dfrac{(2N)!}{n_e!(2N-n_e)!}$$
+
+是一个随N和$n_e$指数增长的数。如果$N=8,n_e=4$的话，Hilbert空间的维数为1820，不可能纯手算，只能利用一些产生湮灭算符的规律来借助代码实现。
+
+## 基矢的约定与表示
+为了在计算机中标记这些基矢，我们采用类似二进制编码的办法。考虑到解析地写出基态为
+
+$$ \ket{\psi}=c_{m_1\uparrow}^{\dagger}...c_{m_M\uparrow}^{\dagger}c_{n_1\downarrow}^{\dagger}...c_{n_N\downarrow}^{\dagger}\ket{0}$$ 
+
+其中$M+N=n_e$为总电子数。我们用一个长2N的01字符串来代表这个式子，前N个代表spin up，后N个代表spin down，上面基矢中电子占据的轨道上为1，未占据为0，穷举出所有的这种01字符串即可得到相应的基矢。实际上，这里
+用到的是位掩码(bitmask)。我们可以通过从全是零的字符串开始，假设占据了$m_1,m_2,m_3,m_4$四个状态，考虑到$2^m$只是在第m个位置上变成1(m从0开始)，于是我们直接让初始的bitmask加上$2^{m_j}$遍历j，即可构造所有的基矢。
+所以这里的步骤是：
+1. 找到所有的占据组合数与组合情况
+2. 对每一个组合情况，得到其位掩码并赋值给basis
+
+于是，我们可以按照这个思路写出以下MATLAB代码来构造基矢。
+```matlab "Basis"
+clc
+clear all
+close all
+
+ne=4;
+N=8;
+basis=[];
+count=0;
+all_combinations=nchoosek(0:2*N-1, ne);   % 利用nchoosek函数来得到从0-15，占据四个位置的所有可能性，最后会返还一个矩阵，每一行对应一个组合
+
+for k=1:size(all_combinations,1)  % all_combinations的第一个维度(列)对应组合的序号
+    bitmask=0;  % 初始化bitmask
+    for j=all_combinations(k,:)   % 取第k个组合中的占据
+        bitmask=bitmask+2^j;      % 在第k个组合对应的占据中给Bitmask赋值为1
+    end
+    count=count+1;
+    basis(count)=bitmask;         % 把bitmask赋值给basis，这样转化到二进制之后就能得到想要的基矢了
+    basis_map(bitmask)=count;     % 为了后续索引的方便，我们定义basis_map，给定bitmask，可以得到其对应的索引
+end
+dim = length(basis);
+fprintf('希尔伯特空间维度: %d\n', dim); % 应该输出 1820 (以N=8，ne=4为例)
+```
+ 
+## 哈密顿量的矩阵表示
+为了在上面基矢下得到哈密顿量的矩阵形式，我们需要知道哈密顿量作用到上面每一个基矢后的结果。为此分别给出hopping terms，Hubbard U terms以及Hund's coupling作用上去的规律。
+这里我们的格点模型为两个正四面体耦合的cluster，这两个cluster之间的耦合为$t_1$。
+### Hopping terms
+从位掩码上看，跃迁的动能项$c_i^{\dagger}c_j$本质上就是把第j个位点上的1变成0，再把第i个位点上的0变成1的过程。因此，我们首先需要检查第j个位点上是否有占据，以及第i个位点有空。
+然而，一个极其重要的地方在于，考虑到费米子算符的反交换性，hopping除了上述0-1转换之外，还存在有$(-1)^{p+q}$的因子。因此我们还需要对产生湮灭算符分别确定其交换的次数，从而确定最后结果的
+正负号。
+
+首先对于湮灭算符，作用到第j个位点上，我们需要知道第j个位点前面有几个产生算符，这样交换之后产生$(-1)^p$的因子。同理，对第i个位点的产生算符，我们也需要知道其前面有几个产生算符，这样交换之后
+得到$(-1)^q$的因子。最后将二者合并即可得到$(-1)^{p+q}$。 
+
+另一方面，哪些格点之间存在hopping是可以人为决定的，同时还应保证自旋守恒。这一点我们可以通过在第一步给定基矢时赋予其spin以及格点的信息，并通过检索这些信息来判断跃迁是否合理。
+于是，可以通过以下步骤得到hopping的哈密顿矩阵：
+1. 对第j个位点，检验其非空，并检验第i个位点为空
+2. 计算第j个位点前的1的个数(产生算符的个数)，以及第i个位点前的1的个数，得到$(-1)^{p+q}$（需要写一个函数得到符号信息  ）
+3. 检索i,j的格点和自旋信息，若满足跃迁条件，则该哈密顿量的矩阵元为t，否则为0。（需要写一个函数得到轨道信息  get_info）
+4. 记录非零的矩阵元，采用sparse函数得到哈密顿矩阵。这样可以避免计入大量的零而占据内存。
+可以得到如下的MATLAB代码
+```matlab "hopping"
+H_row=[];   % 这三个空矩阵来记录非零矩阵元的行、列指标以及值
+H_col=[];
+H_val=[];
+for k=1:length(basis)     % k是basis的指标
+    state_mask=basis(k);  % 得到第k个基矢对应的bitmask
+
+    for j=0:2*N-1         % 从第j个轨道开始跃迁
+
+        if bitget(state_mask,j+1)   % 如果state_mask转换到0-1后在第j个轨道上有电子
+
+           state_after_annihilation=bitxor(state_mask,(2^j));  % 2^j对应在第j个轨道上有1，经过bitxor之后将其变为0，即湮灭j电子
+           sign_c_j = (-1)^bitcount_before_idx(state_mask, j); % 计算湮灭算符的符号
+
+           for l=0:2*N-1   %电子跃迁到l轨道
+
+               if ~bitget(state_mask,l+1)   %如果state_mask在第i个轨道上没有电子
+
+                  new_state_mask=bitor(state_after_annihilation,(2^l));   %在第l个轨道上产生电子
+                  sign_c_l_dagger=(-1)^bitcount_before_ind(state_after_annihilation,l);
+
+                  if isKey(basis_map,new_state_mask)    % 如果basis_map中确实含有new_state_mask，说明该态存在
+                     new_idx=basis_map(new_state_mask);  % 通过basis_map得到new_state_mask的索引，记作new_idx
+                     h_val=0.0;                         % 先把矩阵元赋值为0，之后判断k-basis以及new_idx-basis之间的跃迁是否被允许
+                                                        % 也就是判断第j和第l个格点之间是否有连接
+                     info_j=get_info(j);
+                     info_l=get_info(l);
+
+                     if info_j.spin == info_l.spin      % hopping term保证自旋守恒
+
+                        if info_j.cluster == info_l.cluster  % 考虑胞内耦合                        
+                           orbital_j = orbital_names{info_j.orbital+1};
+                           orbital_l = orbital_names{info_l.orbital+1};   % 分别得到j和l对应的轨道
+
+                           % 胞内为正四面体的耦合
+                           if (strcmp(orbital_j,'a') && strcmp(orbital_l,'b') ) ||
+                              (strcmp(orbital_j,'a') && strcmp(orbital_l,'c') ) ||
+                              (strcmp(orbital_j,'a') && strcmp(orbital_l,'d') ) ||
+                              (strcmp(orbital_j,'b') && strcmp(orbital_l,'a') ) ||
+                              (strcmp(orbital_j,'b') && strcmp(orbital_l,'c') ) ||
+                              (strcmp(orbital_j,'b') && strcmp(orbital_l,'d') ) ||
+                              (strcmp(orbital_j,'c') && strcmp(orbital_l,'a') ) ||
+                              (strcmp(orbital_j,'c') && strcmp(orbital_l,'b') ) ||
+                              (strcmp(orbital_j,'c') && strcmp(orbital_l,'d') ) ||
+                              (strcmp(orbital_j,'d') && strcmp(orbital_l,'a') ) ||
+                              (strcmp(orbital_j,'d') && strcmp(orbital_l,'b') ) ||
+                              (strcmp(orbital_j,'d') && strcmp(orbital_l,'c') ) || 
+
+                              h_val=h_val+t;  % 如果满足cluster的正四面体耦合，则hopping赋值为t
+                           end
+                         end
+
+                         if (info_j.cluster==1 && strcmp(orbital_j,'d') && info_l.cluster==2 && strcmp(orbital_l,'b')) ||
+                            (info_j.cluster==2 && strcmp(orbital_j,'b') && info_l.cluster==1 && strcmp(orbital_l,'d'))
+
+                            h_val=h_val+t1;  % 两个cluster之间的耦合为t1
+                         end
+
+                         % 下一步则是将h_val储存给哈密顿矩阵。采用sparse函数
+                         if h_val ~= 0
+                            H_row=[H_row;k];
+                            H_col=[H_col;new_idx];
+                            H_val=[H_val;h_val*sign_c_j*sign_c_l_dagger];
+                         end
+                    end
+                end
+             end
+          end
+       end
+  end
+
+% 完成了以上for循环之后，采用sparse即可创建稀疏的跃迁矩阵
+H = sparse(H_row, H_col, H_val, dim, dim);
+```
+
+### Hubbard U Interaction
+onsite的Hubbard相互作用在这组基下是对角的。我们只需要统计有多少双占据的态，把U加起来即可。可以得到如下的MATLAB代码：
+```matlab "Hubbard"
+for k=1:length(basis)     % k是basis的指标
+    state_mask=basis(k);  % 得到第k个基矢对应的bitmask
+    hubbard_energy=0.0;   % 初始化Hubbard
+    for cluster_idx=1:2             % 考虑了两个cluster
+        for orbital_idx=0:3
+             % 根据新的索引规则找到对应轨道的up和down自旋索引
+            idx_up = orb_idx + (cluster_idx - 1) * 4;     % 1-8:spin up
+            idx_down = idx_up + num_total_orbitals;       % 9-16:spin down
+            
+            if bitget(state_mask, idx_up + 1) && bitget(state_mask, idx_down + 1)  % 如果这个态在spin up和spin down同一个轨道
+                hubbard_energy = hubbard_energy + U;
+            end
+     end
+    H_rows = [H_rows; k];
+    H_cols = [H_cols; k];
+    H_vals = [H_vals; hubbard_energy];
+end
+```
+
+### 轨道间Hubbard Interaction U'
+轨道间的Hubbard U'也是对角项，我们需要统计同一个cluster内的相邻轨道间的占据数。首先对于给定的state_mask，给定cluster，得到其占据$n_orbitals=[na,nb,nc,nd]$。之后
+从这四个轨道中挑两个（nchoosek）得到各种组合，计算每个组合的占据数乘积并相加。最后对cluster再相加。
+```matlab "inter-orbital Hubbard U'"
+for k=1:length(basis)
+   state_mask=basis(k);
+   inter_orbital_energy = 0.0;
+        for cluster_idx = 1:num_clusters   %给定cluster
+           n_orbitals = zeros(1, num_orbitals_per_cluster); % n_a, n_b, n_c, n_d   % 定义占据数
+          for orb_idx = 0:num_orbitals_per_cluster-1
+               idx_up = orb_idx + (cluster_idx - 1) * num_orbitals_per_cluster;
+               idx_down = idx_up + num_total_orbitals;
+               n_orbitals(orb_idx + 1) = bitget(state_mask, idx_up + 1) + bitget(state_mask, idx_down + 1);   % n=n_up+n_down
+           end
+
+           orbital_pairs = nchoosek(1:num_orbitals_per_cluster, 2);     % 依旧利用nchoose得到四个轨道的六种组合
+           for p = 1:size(orbital_pairs, 1)
+               o1_idx = orbital_pairs(p, 1);
+               o2_idx = orbital_pairs(p, 2);
+               if n_orbitals(o1_idx) > 0 && n_orbitals(o2_idx) > 0 
+                   inter_orbital_energy = inter_orbital_energy + U_prime*n_orbitals(o1_idx)*n_orbitals(o2_idx);  % U' na*nb+...
+               end
+           end
+       end
+       H_rows = [H_rows; k];
+       H_cols = [H_cols; k];
+       H_vals = [H_vals; inter_orbital_energy];
+end
+```
+
+### Hund's coupling 
+相互作用中比较麻烦的是洪特耦合的处理。其中既包含了对角元$S_zS_z$，也包含了spin-split项，贡献非对角元。我们可以分别来处理。首先对于对角元，通过统计
+两个轨道上的up，down占据数差异的乘积即可。同样可以采用nchoose得到轨道组合，之后利用轨道和自旋索引得到占据数，利用$S_zS_z=\dfrac{1}{4}m_zm_z$即可。
+对于自旋翻转项，其可以写成$S_a^+S_b^-+S_a^-S_b^+$，对于每一个自旋升降算符，其与单一的费米子产生湮灭算符都是完全对易的，因此我们不需要考虑符号问题，只需要
+验证，对于自旋升算符，其轨道的down占据，up不占据，自旋降算符反之。最后将结果加起来即可。
+
+从而得到如下的MATLAB代码：
+```matlab "Hund's Coupling"
+for k=1:length(basis)
+    state_mask=basis(k);
+    hund_energy=0.0;
+    % 计算SzSz的值
+    for cluster_idx=1:2
+        orbital_pairs=nchoosek(0:3,2);   % 对每一个cluster，从四个轨道中选择两个轨道
+        for p=1:size(orbital_pairs,1)    % 对每一个轨道的组合
+
+            orbital_1_up=orbital_pairs(p,1)+(cluster_idx-1)*4;      % 得到两个轨道的spin up和spin down索引
+            orbital_2_up=orbital_pairs(p,2)+(cluster_idx-1)*4;
+            orbital_1_down=orbital_pairs(p,1)+(cluster_idx-1)*4+8;
+            orbital_2_down=orbital_pairs(p,2)+(cluster_idx-1)*4+8;    
+             
+            n1_up=bitget(state_mask,orbital_1_up+1);                % 由上面的索引得到两个轨道上的占据数以及磁矩
+            n1_down=bitget(state_mask,orbital_1_down+1);
+            n2_up=bitget(state_mask,orbital_2_up+1);
+            n2_down=bitget(state_mask,orbital_2_down+1);
+
+            S1z=(n1_up-n1_down)/2;
+            S2z=(n2_up-n2_down)/2;
+
+            hund_energy=hund_energy+(-J)*S1z*S2z;
+            % 计算升降算符的值
+            % 在上面组合的基础上，首先判断轨道的占据情况是否对应非零的矩阵元 
+            % 先计算S1^+S2^-
+            if n1_down && (~n1_up) && n2_up && (~n2_down)  % 如果n_1down和n2_up上有占据
+               temp_mask_c1_d = bitxor(basis_state_mask, (2^orbital_1_down)); % 移除 down1
+               temp_mask_c1_d_c2_u = bitxor(temp_mask_c1_d, (2^orbital_2_up)); % 移除 up2
+
+               temp_mask_c1_d_c2_u_c1_u = bitor(temp_mask_c1_d_c2_u, (2^orbital_1_up)); % 添加 up1
+               new_state_mask = bitor(temp_mask_c1_d_c2_u_c1_u, (2^orbital_2_down));   % 添加 down2
+               % 得到新的态之后确定其索引
+               if isKey(basis_map, new_state_mask)  % 如果新的态是正确的
+                  new_idx=basis_map(new_state_mask);
+               end
+               H_rows = [H_rows; k];
+               H_cols = [H_cols; new_idx];
+               H_vals = [H_vals; -J/2];
+            end
+
+            % 再计算S1^-S2^+
+            if n1_up && (~n1_down) && n2_down && (~n2_up)  % 如果n_1up和n2_down上有占据
+               temp_mask_c1_d = bitxor(basis_state_mask, (2^orbital_1_up)); % 移除 up1
+               temp_mask_c1_d_c2_u = bitxor(temp_mask_c1_d, (2^orbital_2_down)); % 移除 down2
+
+               temp_mask_c1_d_c2_u_c1_u = bitor(temp_mask_c1_d_c2_u, (2^orbital_1_down)); % 添加 down1
+               new_state_mask = bitor(temp_mask_c1_d_c2_u_c1_u, (2^orbital_2_up));   % 添加 up2
+               % 得到新的态之后确定其索引
+               if isKey(basis_map, new_state_mask)  % 如果新的态是正确的
+                  new_idx=basis_map(new_state_mask);
+               end
+               H_rows = [H_rows; k];
+               H_cols = [H_cols; new_idx];
+               H_vals = [H_vals; -J/2];
+            end
+
+         end
+        H_rows = [H_rows; k];
+        H_cols = [H_cols; k];
+        H_vals = [H_vals; hund_energy];
+      end
+end
+```
+### Final Hamiltonian Matrix
+现在我们已经得到了hopping term, Hubbard U and U' and Hund's coupling的非零矩阵索引以及矩阵元。我们可以采用sparse在MATLAB中创建该稀疏矩阵。
+```matlab "sparse matrix"
+H = sparse(H_rows, H_cols, H_vals, dim, dim);
+```
+最后只需要对角化即可得到相应的本征能以及本征态。
