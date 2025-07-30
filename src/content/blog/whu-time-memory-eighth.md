@@ -1,7 +1,7 @@
 ---
 title: 毕业季10：Memory，弥梦离——醒梦
 description: WHU的终章：2025.02-2025.06
-pubDate: 07 30 2025
+pubDate: 07 31 2025
 image: /image/whu-time-memory-8.jpg
 categories:
   - Memory

@@ -1,7 +1,7 @@
 ---
 title: 毕业季03：毕业论文致谢
 description: 本科毕业论文的致谢部分
-pubDate: 07 28 2025
+pubDate: 06 28 2025
 image: /image/Thanks-part.jpg
 categories:
   - Memory

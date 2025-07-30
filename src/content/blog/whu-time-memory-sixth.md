@@ -1,7 +1,7 @@
 ---
 title: 毕业季08：Memory，弥梦离——折桂
 description: WHU，终有春风得意之日：2024.02-2024.07
-pubDate: 07 30 2025
+pubDate: 07 26 2025
 image: /image/whu-time-memory-6.jpg
 categories:
   - Memory
