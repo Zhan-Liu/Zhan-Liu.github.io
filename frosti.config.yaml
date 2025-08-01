@@ -50,6 +50,38 @@ site:
           svg: "lucide:snowflake"
           target: _self
         # 子菜单项配置
+    - id: gallery # 照片墙的唯一标识符
+      text: Photos # 菜单项上显示的文本，你可以改成“照片墙”或“Gallery”
+      href: /gallery # 指向你的照片墙页面的链接地址
+      svg: "material-symbols:photo-library-outline-rounded" # 照片墙的SVG图标
+      target: _self # 在当前标签页打开
+      subItems:
+        - id: 2021.09-2022.06
+          text: 大一
+          href: /gallery
+          svg: "material-symbols:ink-pen-outline-rounded"
+          target: _self
+        - id: 2022.07-2023.08
+          text: 大二
+          href: /gallery
+          svg: "material-symbols:cannabis-outline-rounded"
+          target: _self
+        - id: 2023.09-2024.07
+          text: 大三
+          href: /gallery
+          svg: "material-symbols:keyboard"
+          target: _self
+        - id: 大四
+          text: 2024.08-2025.06
+          href: /gallery
+          svg: "lucide:snowflake"
+          target: _self
+        - id: 毕业季
+          text: 毕业记忆
+          href: /gallery
+          svg: "lucide:snowflake"
+          target: _self
+        # 子菜单项配置
     - id: publication
       text: Publication
       href: /publication
