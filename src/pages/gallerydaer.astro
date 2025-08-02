@@ -1,0 +1,414 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import MainCard from "@/components/MainCard.astro";
+
+// 导入 SimpleLightbox 的 CSS
+import 'simple-lightbox/dist/simpleLightbox.min.css';
+
+const photos = [
+  {
+    src: "/image/gallery_daer/mydesk3.jpg", // 你的图片路径
+    alt: "我的书桌",
+    description: "大一结束了，那个时候的书桌，它见证了我那段时光",
+    date: "2022年07月15日",
+  },
+  {
+    src: "/image/gallery_daer/summer_chifan.jpg", // 你的图片路径
+    alt: "吃饭",
+    description: "放暑假和嘉琦芃芃来吃好吃的",
+    date: "2022年07月20日",
+  },
+  {
+    src: "/image/gallery_daer/summer_night.jpg", // 你的图片路径
+    alt: "夜晚游玩",
+    description: "晚上在聚龙湾门口的小公园玩到很晚......",
+    date: "2022年07月31日",
+  },
+  {
+    src: "/image/gallery_daer/zhongshangongyuan.jpg", // 你的图片路径
+    alt: "中山公园",
+    description: "那天下午在中山公园自已溜达溜达",
+    date: "2022年08月11日",
+  },
+  {
+    src: "/image/gallery_daer/a_picture.jpg", // 你的图片路径
+    alt: "一幅画",
+    description: "这是一幅未画完的画。",
+    date: "2022年08月27日",
+  },
+  {
+    src: "/image/gallery_daer/huiyizhong_huaxuelaoshi.jpg", // 你的图片路径
+    alt: "回一中",
+    description: "在化学老师的邀请下回一中看看",
+    date: "2022年08月31日",
+  },
+  {
+    src: "/image/gallery_daer/shuwu_qcy.jpg", // 你的图片路径
+    alt: "数理方法",
+    description: "数学物理方法的第一节课",
+    date: "2022年09月05日",
+  },
+  {
+    src: "/image/gallery_daer/zhongqiujie.jpg", // 你的图片路径
+    alt: "中秋节",
+    description: "中秋节学校发了月饼，珞珈，家",
+    date: "2022年09月08日",
+  },
+  {
+    src: "/image/gallery_daer/yingding_night.jpg", // 你的图片路径
+    alt: "樱顶",
+    description: "晚上一个人骑车在学校里溜达，骑上了樱顶",
+    date: "2022年09月13日",
+  },
+  {
+    src: "/image/gallery_daer/happy_birthday.jpg", // 你的图片路径
+    alt: "生日快乐",
+    description: "尽力了，捏了好久，哈哈",
+    date: "2022年09月17日",
+  },
+  {
+    src: "/image/gallery_daer/huanghelou.jpg", // 你的图片路径
+    alt: "黄鹤楼",
+    description: "国庆假期一起去了黄鹤楼",
+    date: "2022年09月30日",
+  },
+  {
+    src: "/image/gallery_daer/ticehuoguo.jpg", // 你的图片路径
+    alt: "火锅",
+    description: "和齐良骏体测完吃了火锅",
+    date: "2022年11月11日",
+  },
+  {
+    src: "/image/gallery_daer/tushuguan.jpg", // 你的图片路径
+    alt: "图书馆雨天",
+    description: "下雨天在图书馆，中午来桂圆吃饭拍了一张，难得心安",
+    date: "2022年11月21日",
+  },
+  {
+    src: "/image/gallery_daer/fengqinqianye.jpg", // 你的图片路径
+    alt: "封寝前夜",
+    description: "封寝前夜，和室友一起去超市买吃的",
+    date: "2022年11月21日",
+  },
+  {
+    src: "/image/gallery_daer/orange.jpg", // 你的图片路径
+    alt: "橘子",
+    description: "封寝期间发的小橘子~",
+    date: "2022年12月09日",
+  },
+  {
+    src: "/image/gallery_daer/gohome.jpg", // 你的图片路径
+    alt: "回家",
+    description: "回家了",
+    date: "2022年12月09日",
+  },
+  {
+    src: "/image/gallery_daer/yizhongxuanjiang.jpg", // 你的图片路径
+    alt: "一中宣讲",
+    description: "和芃芃回一中宣讲",
+    date: "2023年01月03日",
+  },
+  {
+    src: "/image/gallery_daer/kanlaogeng.jpg", // 你的图片路径
+    alt: "看老耿",
+    description: "和芃芃嘉琦还有陈向阳吃顿火锅去看耿老师",
+    date: "2023年01月16日",
+  },
+  {
+    src: "/image/gallery_daer/guonianle.jpg", // 你的图片路径
+    alt: "过年",
+    description: "过年了，烧锅的时候用火棍画了个竹子",
+    date: "2023年01月21日",
+  },
+  {
+    src: "/image/gallery_daer/dianying.jpg", // 你的图片路径
+    alt: "流浪地球",
+    description: "去看了流浪地球，还去放了风筝，不过风筝不见了",
+    date: "2023年01月27日",
+  },
+  {
+    src: "/image/gallery_daer/yingzi.jpg", // 你的图片路径
+    alt: "影子",
+    description: "三个人看完电影后夕阳下的影子，此后竟少有这种时刻了",
+    date: "2023年01月27日",
+  },
+  {
+    src: "/image/gallery_daer/zhouziqitubu.jpg", // 你的图片路径
+    alt: "徒步",
+    description: "一起徒步周子齐，夕阳真美",
+    date: "2023年01月31日",
+  },
+  {
+    src: "/image/gallery_daer/chifan.jpg", // 你的图片路径
+    alt: "吃饭",
+    description: "来芃芃家吃饭",
+    date: "2023年02月07日",
+  },
+  {
+    src: "/image/gallery_daer/yinghua.jpg", // 你的图片路径
+    alt: "樱花",
+    description: "樱花又开了",
+    date: "2023年03月22日",
+  },
+  {
+    src: "/image/gallery_daer/laifang.jpg", // 你的图片路径
+    alt: "初中同学",
+    description: "初中同学和他对象来武汉玩，带他们逛逛武大",
+    date: "2023年04月05日",
+  },
+  {
+    src: "/image/gallery_daer/lab.jpg", // 你的图片路径
+    alt: "实验室",
+    description: "在实验室和师兄做实验",
+    date: "2023年05月11日",
+  },
+  {
+    src: "/image/gallery_daer/wencheng.jpg", // 你的图片路径
+    alt: "文城",
+    description: "考完了热统，终于闲下心来看看书。一口气读到半夜三点读完了余华的文城，that's all fate",
+    date: "2023年06月10日",
+  },
+  {
+    src: "/image/gallery_daer/cat.jpg", // 你的图片路径
+    alt: "猫猫",
+    description: "去自习室看书，外面有一只可爱的猫猫",
+    date: "2023年06月11日",
+  },
+  {
+    src: "/image/gallery_daer/singpore.jpg", // 你的图片路径
+    alt: "新加坡",
+    description: "Go,Singapore",
+    date: "2023年06月25日",
+  },
+  {
+    src: "/image/gallery_daer/yuweishi.jpg", // 你的图片路径
+    alt: "鱼尾狮",
+    description: "新加坡的鱼尾狮",
+    date: "2023年06月29日",
+  },
+  {
+    src: "/image/gallery_daer/NUS.jpg", // 你的图片路径
+    alt: "NUS",
+    description: "去新国立的暑期学校",
+    date: "2023年06月26日",
+  },
+  {
+    src: "/image/gallery_daer/zhangyijichang.jpg", // 你的图片路径
+    alt: "樟宜机场",
+    description: "新加坡樟宜机场，太好看啦",
+    date: "2023年07月02日",
+  },
+  {
+    src: "/image/gallery_daer/mydesk4.jpg", // 你的图片路径
+    alt: "书桌4",
+    description: "大二结束时我的书桌，原来那个时候书就不少了",
+    date: "2023年07月04日",
+  },
+  {
+    src: "/image/gallery_daer/shaokao.jpg", // 你的图片路径
+    alt: "烧烤",
+    description: "嘉琦家的烧烤真好吃，还有可爱的小狗狗",
+    date: "2023年07月22日",
+  },
+  {
+    src: "/image/gallery_daer/fudanwuli.jpg", // 你的图片路径
+    alt: "复旦物理",
+    description: "八月份去了复旦的张远波组做暑期科研，那时特别激动，而扫除阴霾的转机也就此而来",
+    date: "2023年08月01日",
+  },
+  {
+    src: "/image/gallery_daer/shanghaidianying.jpg", // 你的图片路径
+    alt: "看电影",
+    description: "四个人在上海去看了电影",
+    date: "2023年08月07日",
+  },
+  {
+    src: "/image/gallery_daer/jiudianchifan.jpg", // 你的图片路径
+    alt: "在酒店吃饭",
+    description: "在复旦的一个月最开心的就是四个人在酒店点一大桌吃的",
+    date: "2023年08月22日",
+  },
+  {
+    src: "/image/gallery_daer/beiying.jpg", // 你的图片路径
+    alt: "背影",
+    description: "从此刻开始，未来在WHU的两年我们形影不离",
+    date: "2023年08月28日",
+  },
+  // 添加更多你的图片数据
+  // {
+  //   src: "/image/gallery/your-other-image.png",
+  //   alt: "其他图片",
+  //   description: "这张图片是关于...",
+  //   date: "YYYY年MM月DD日",
+  // },
+];
+---
+
+<BaseLayout title="Moments">
+  <MainCard
+    title="Moments"
+    description="Where moments pause, and stories unfold."
+    infoIcon="lucide:link"
+  >
+    <div class="gallery-container">
+      {photos.map((photo, index) => (
+        <div class="gallery-item">
+          {/* SimpleLightbox 推荐图片被 <a> 标签包裹，href 指向大图 */}
+          <a href={photo.src} class="simple-lightbox-item" data-title={`${photo.description} <br> ${photo.date}`}>
+            <img src={photo.src} alt={photo.alt} loading="lazy" />
+          </a>
+          <div class="image-overlay">
+            <p class="image-description">{photo.description}</p>
+            <p class="image-date">{photo.date}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </MainCard>
+</BaseLayout>
+
+{/* ⚡️ 移除或注释掉你之前所有的模态框 HTML 结构：
+  <div id="image-modal" class="modal">...</div> 
+*/}
+
+{/* ⚡️ SimpleLightbox 的初始化脚本 ⚡️
+  需要放在页面底部，确保 DOM 元素已经加载
+*/}
+<script type="module" is:inline>
+  // 从 'simple-lightbox' 导入 SimpleLightbox
+  import SimpleLightbox from 'simple-lightbox';
+
+  // 定义初始化函数，确保 SimpleLightbox 在 DOM 加载或页面导航后运行
+  function initializeSimpleLightbox() {
+    // 选中所有带有 'simple-lightbox-item' 类的 <a> 标签
+    // data-title 属性将作为图片下方显示的标题和日期
+    const gallery = new SimpleLightbox('.simple-lightbox-item', {
+      captionDelay: 0, // 标题显示延迟
+      fadeSpeed: 300,  // 淡入淡出速度
+      animationSpeed: 200, // 切换动画速度
+      history: false, // 禁用历史记录，避免与 Astro 路由冲突
+      // navigation: false, // 如果你不想显示左右箭头
+       close: true, // 如果你不想显示关闭按钮
+       closeOnOverlayClick: true
+      // showCounter: false, // 如果你不想显示图片计数 (1/5)
+      // navText: ['&#x2190;', '&#x2192;'], // 自定义导航箭头
+      // 其他配置选项请查阅 SimpleLightbox 官方文档
+    });
+
+    // 可以在这里添加一些事件监听，例如图片加载完成后的回调
+    // gallery.on('show.simplelightbox', function(){
+    //   console.log('Lightbox is showing');
+    // });
+  }
+
+  // 确保在 Astro 页面加载完成后初始化 SimpleLightbox
+  document.addEventListener('astro:page-load', initializeSimpleLightbox);
+
+  // 如果你的项目使用 Astro View Transitions (客户端路由)，
+  // 还需要在每次客户端导航后重新初始化，以确保新加载的图片也能被识别
+  document.addEventListener('astro:after-swap', initializeSimpleLightbox);
+</script>
+
+<style lang="scss">
+
+/* --- 你的所有照片墙图片及容器样式 (保持不变) --- */
+.gallery-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 25px;
+  padding: 10px;
+}
+
+.gallery-item {
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  cursor: pointer;
+  background-color: #fff;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+  }
+
+  /* ⚡️ 关键改动：gallery-item img 尺寸不变，但现在被 <a> 包裹 ⚡️ */
+  img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    display: block;
+    border-radius: 8px 8px 0 0;
+    transition: transform 0.3s ease-in-out;
+  }
+  &:hover img {
+    transform: scale(1.08);
+  }
+
+  /* ⚡️ SimpleLightbox 相关的 CSS 已经由库自身提供，
+    你不需要在这里编写模态框的 .modal, .modal-content 等样式。
+    你只需确保你的 .simple-lightbox-item <a> 标签覆盖了整个图片，
+    以便用户点击图片即可触发 Lightbox。
+  */
+  .simple-lightbox-item {
+    display: block; /* 确保 <a> 标签占据空间 */
+    line-height: 0; /* 移除可能的行高影响 */
+  }
+
+  .image-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.75);
+    color: white;
+    padding: 15px 10px;
+    box-sizing: border-box;
+    transform: translateY(100%);
+    transition: transform 0.3s ease-in-out;
+    border-radius: 0 0 8px 8px;
+  }
+  &:hover .image-overlay {
+    transform: translateY(0);
+  }
+
+  .image-description {
+    margin: 0;
+    font-size: 0.95em;
+    text-align: center;
+    line-height: 1.4;
+  }
+
+  .image-date {
+    margin-top: 5px;
+    font-size: 0.8em;
+    color: rgba(255, 255, 255, 0.7);
+    text-align: center;
+  }
+}
+/* --- 你的所有照片墙图片及容器样式 (保持不变) --- */
+/* ... 现有样式 ... */
+
+/* ⚡️ 强制显示和美化 SimpleLightbox 的关闭按钮 ⚡️ */
+.sl-close {
+  position: fixed !important; /* 确保它固定在视口 */
+  top: 20px !important;       /* 距离顶部 20px */
+  right: 20px !important;      /* 距离右侧 20px */
+  font-size: 3em !important;   /* 字体放大到 3 倍，非常显眼 */
+  color: #c31c1c !important;      /* 纯白色，确保在深色背景上突出 */
+  text-shadow: 0 0 8px rgba(0, 0, 0, 0.8) !important; /* 添加深色阴影，增加对比度 */
+  opacity: 1 !important;       /* 确保完全不透明 */
+  cursor: pointer !important;  /* 鼠标悬停显示手型光标 */
+  z-index: 1000000 !important; /* 确保在所有内容之上 */
+}
+
+/* ⚡️ 确保背景可点击关闭 ⚡️ */
+/* SimpleLightbox 的背景元素通常是 .sl-overlay 或类似的类 */
+/* 如果点击背景无法关闭，有时是因为背景被其他透明元素覆盖或 z-index 问题 */
+/* 尽管 SimpleLightbox 库通常会处理好，但如果遇到问题，可以添加以下样式 */
+/* .sl-overlay {
+  z-index: 999999 !important; /* 确保背景在内容之下但在关闭按钮之下
+  pointer-events: auto !important; /* 确保能接收点击事件
+} */
+</style>
