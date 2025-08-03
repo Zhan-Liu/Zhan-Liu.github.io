@@ -59,27 +59,27 @@ site:
         - id: 2021.09-2022.06
           text: 大一
           href: /gallerydayi
-          svg: "material-symbols:ink-pen-outline-rounded"
+          svg: "lucide:heart-pulse"
           target: _self
         - id: 2022.07-2023.08
           text: 大二
           href: /gallerydaer
-          svg: "material-symbols:cannabis-outline-rounded"
+          svg: "lucide:sunset"
           target: _self
         - id: 2023.09-2024.07
           text: 大三
           href: /gallerydasan
-          svg: "material-symbols:keyboard"
+          svg: "lucide:sunrise"
           target: _self
         - id: 2024.08-2025.06
           text: 大四
           href: /gallerydasi
-          svg: "lucide:snowflake"
+          svg: "lucide:sun-snow"
           target: _self
         - id: 毕业季
           text: 毕业记忆
-          href: /gallery
-          svg: "lucide:snowflake"
+          href: /gallerybiye
+          svg: "material-symbols:blur-on"
           target: _self
         # 子菜单项配置
     - id: publication

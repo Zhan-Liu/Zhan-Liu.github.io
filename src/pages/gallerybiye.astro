@@ -1,0 +1,618 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import MainCard from "@/components/MainCard.astro";
+
+// 导入 SimpleLightbox 的 CSS
+import 'simple-lightbox/dist/simpleLightbox.min.css';
+
+const photos = [
+  {
+    src: "/image/gallery_biye/duolaAmeng.jpg", // 你的图片路径
+    alt: "哆啦A梦",
+    description: "六一儿童节快乐！去看了哆啦A梦的电影，找回童年了",
+    date: "2025年06月01日",
+  },
+  {
+    src: "/image/gallery_biye/jitibiyezhao.jpg", // 你的图片路径
+    alt: "集体毕业照",
+    description: "终究是到了拍毕业照的那天，毕业的氛围还是来了",
+    date: "2025年06月05日",
+  },
+  {
+    src: "/image/gallery_biye/dongbeicai.jpg", // 你的图片路径
+    alt: "东北菜",
+    description: "临毕业校门口开了家新的东北菜，我们经常去那里吃。",
+    date: "2025年06月05日",
+  },
+  {
+    src: "/image/gallery_biye/beiying.jpg", // 你的图片路径
+    alt: "背影",
+    description: "王云睿明天就要走了，今晚我们最后一次一起走这条回宿舍的小路，留住此刻。",
+    date: "2025年06月05日",
+  },
+  {
+    src: "/image/gallery_biye/haidilao.jpg", // 你的图片路径
+    alt: "海底捞",
+    description: "再一次，在海底捞给王云睿送行，这下真的要说再见了......",
+    date: "2025年06月06日",
+  },
+  {
+    src: "/image/gallery_biye/haidilao_hezhao.jpg", // 你的图片路径
+    alt: "海底捞合照",
+    description: "我们在海底捞最后的合照",
+    date: "2025年06月06日",
+  },
+  {
+    src: "/image/gallery_biye/yangqiceng.jpg", // 你的图片路径
+    alt: "氧气层",
+    description: "和齐良骏在氧气层吃饭，才发现这个氧气味道这么好看又好喝",
+    date: "2025年06月07日",
+  },
+  {
+    src: "/image/gallery_biye/alice_niupai.jpg", // 你的图片路径
+    alt: "爱丽丝牛排",
+    description: "徐毅豪外出开会回来，时隔一年再次来到这里吃牛排，三人同行一人免单",
+    date: "2025年06月11日",
+  },
+  {
+    src: "/image/gallery_biye/tushuguan.jpg", // 你的图片路径
+    alt: "重回图书馆",
+    description: "再次回到了图书馆，A5的书架满眼熟悉，当年那个大一的我和当下大四的我的身影重合",
+    date: "2025年06月13日",
+  },
+  {
+    src: "/image/gallery_biye/biji.jpg", // 你的图片路径
+    alt: "笔记",
+    description: "找到了大二借的书，里面竟然还夹着我当时做的笔记，这是一场时间的对话",
+    date: "2025年06月13日",
+  },
+  {
+    src: "/image/gallery_biye/hongyibiyedianli.jpg", // 你的图片路径
+    alt: "荣誉之冠",
+    description: "荣誉之冠——弘毅学堂毕业典礼。真的快要到了说再见的时候了",
+    date: "2025年06月17日",
+  },
+  {
+    src: "/image/gallery_biye/hongyijinianpin.jpg", // 你的图片路径
+    alt: "弘毅纪念品",
+    description: "弘毅发的纪念品，一支笔和一个书签",
+    date: "2025年06月17日",
+  },
+  {
+    src: "/image/gallery_biye/hongyibiye.jpg", // 你的图片路径
+    alt: "弘毅毕业",
+    description: "少堂主，毕业快乐，前程似锦！弘毅学堂，有缘再会",
+    date: "2025年06月17日",
+  },
+  {
+    src: "/image/gallery_biye/wulihongyi.jpg", // 你的图片路径
+    alt: "弘毅物理",
+    description: "这四年，我们都是物理弘毅班的",
+    date: "2025年06月17日",
+  },
+  {
+    src: "/image/gallery_biye/qianming.jpg", // 你的图片路径
+    alt: "签名",
+    description: "在最后的时刻，我们签下彼此的名字",
+    date: "2025年06月17日",
+  },
+  {
+    src: "/image/gallery_biye/rongyubiyesheng.jpg", // 你的图片路径
+    alt: "荣誉毕业生",
+    description: "嘿嘿，我也是荣誉毕业生了（虽然弘毅的每个人都有）",
+    date: "2025年06月17日",
+  },
+  {
+    src: "/image/gallery_biye/biyele.jpg", // 你的图片路径
+    alt: "毕业了",
+    description: "属于这一届弘毅的故事，在灯光和歌声中完结了",
+    date: "2025年06月17日",
+  },
+  {
+    src: "/image/gallery_biye/tushuguan_shuichi.jpg", // 你的图片路径
+    alt: "图书馆水池",
+    description: "图书馆二楼的小房间",
+    date: "2025年06月18日",
+  },
+  {
+    src: "/image/gallery_biye/tushuguan_erlou.jpg", // 你的图片路径
+    alt: "图书馆二楼",
+    description: "图书馆二楼有咖啡馆，荷花和鲤鱼",
+    date: "2025年06月18日",
+  },
+  {
+    src: "/image/gallery_biye/tushuguan_xuyihao.jpg", // 你的图片路径
+    alt: "图书馆徐毅豪",
+    description: "和徐毅豪来和图书馆告别了",
+    date: "2025年06月18日",
+  },
+  {
+    src: "/image/gallery_biye/qiujinli.jpg", // 你的图片路径
+    alt: "求锦鲤",
+    description: "求锦鲤~",
+    date: "2025年06月18日",
+  },
+  {
+    src: "/image/gallery_biye/tushuguanzuowei.jpg", // 你的图片路径
+    alt: "图书馆位子",
+    description: "曾经我也是这里面的一员呀",
+    date: "2025年06月18日",
+  },
+  {
+    src: "/image/gallery_biye/tushuguanbiye.jpg", // 你的图片路径
+    alt: "图书馆毕业",
+    description: "图书馆小布祝你毕业快乐！",
+    date: "2025年06月18日",
+  },
+  {
+    src: "/image/gallery_biye/biyekuaile.jpg", // 你的图片路径
+    alt: "物院毕业",
+    description: "我写毕业快乐，你写happy ending~",
+    date: "2025年06月19日",
+  },
+  {
+    src: "/image/gallery_biye/hongyizhiye.jpg", // 你的图片路径
+    alt: "弘毅之夜",
+    description: "弘毅之夜——弘毅学堂毕业晚会",
+    date: "2025年06月19日",
+  },
+  {
+    src: "/image/gallery_biye/hongyiyingguangbang.jpg", // 你的图片路径
+    alt: "弘毅荧光棒",
+    description: "荧光棒让旋律有了色彩",
+    date: "2025年06月19日",
+  },
+  {
+    src: "/image/gallery_biye/wuyuanwanhui.jpg", // 你的图片路径
+    alt: "物院晚会",
+    description: "从弘毅之夜出来赶场物院的毕业晚会",
+    date: "2025年06月19日",
+  },
+  {
+    src: "/image/gallery_biye/yuzhongqingdian.jpg", // 你的图片路径
+    alt: "雨中庆典",
+    description: "雨中庆典——武汉大学毕业典礼。就让这大雨洗尽离别的伤感，再次响起东湖之滨，珞珈山下，这是我们亲爱的学堂......",
+    date: "2025年06月20日",
+  },
+  {
+    src: "/image/gallery_biye/tushuguan_biyekuaile .jpg", // 你的图片路径
+    alt: "图书馆毕业快乐",
+    description: "典礼之后，在图书馆写下毕业快乐",
+    date: "2025年06月20日",
+  },
+  {
+    src: "/image/gallery_biye/jinianpin.jpg", // 你的图片路径
+    alt: "毕业纪念品",
+    description: "永是珞珈一少年",
+    date: "2025年06月20日",
+  },
+  {
+    src: "/image/gallery_biye/xiaoyou.jpg", // 你的图片路径
+    alt: "校友寄语",
+    description: "此刻，我们从同学变为校友",
+    date: "2025年06月20日",
+  },
+  {
+    src: "/image/gallery_biye/biyechepiao.jpg", // 你的图片路径
+    alt: "毕业车票",
+    description: "我从物院毕业啦~（几个学物理的没想起来66.26是什么意思）",
+    date: "2025年06月20日",
+  },
+  {
+    src: "/image/gallery_biye/shiyuanzhanghezhao.jpg", // 你的图片路径
+    alt: "与石院长的合照",
+    description: "毕业典礼之后与石院长的合照，算是少了一个遗憾",
+    date: "2025年06月20日",
+  },
+  {
+    src: "/image/gallery_biye/biyebaogao.jpg", // 你的图片路径
+    alt: "毕业报告",
+    description: "珞珈山会记得，每一个怀梦而来的孩子",
+    date: "2025年06月20日",
+  },
+  {
+    src: "/image/gallery_biye/yingxin.jpg", // 你的图片路径
+    alt: "迎新",
+    description: "再次翻开迎新手册，“欢迎你，珞珈山的新主人”，这句话也该我们对别人说了",
+    date: "2025年06月22日",
+  },
+  {
+    src: "/image/gallery_biye/chuangwaijingse.jpg", // 你的图片路径
+    alt: "窗外景色",
+    description: "大三大四竟没怎么望过窗外了，这么美的景色常被错过",
+    date: "2025年06月23日",
+  },
+  {
+    src: "/image/gallery_biye/wuyuanbiyepaizi.jpg", // 你的图片路径
+    alt: "物院毕业牌",
+    description: "毕业快乐，未来可期",
+    date: "2025年06月24日",
+  },
+  {
+    src: "/image/gallery_biye/mydesk6.jpg", // 你的图片路径
+    alt: "我的书桌6",
+    description: "桌子上的小摆件",
+    date: "2025年06月25日",
+  },
+  {
+    src: "/image/gallery_biye/mydesk7.jpg", // 你的图片路径
+    alt: "我的书桌7",
+    description: "桌子上的小摆件，这里是我四年的小窝",
+    date: "2025年06月25日",
+  },
+  {
+    src: "/image/gallery_biye/banzhu.jpg", // 你的图片路径
+    alt: "班助",
+    description: "收拾书桌发现了班助学姐给我们写的话，时间过得真快",
+    date: "2025年06月25日",
+  },
+  {
+    src: "/image/gallery_biye/lingzheng.jpg", // 你的图片路径
+    alt: "领证",
+    description: "领证啦，正好四年~",
+    date: "2025年06月25日",
+  },
+  {
+    src: "/image/gallery_biye/yangqiweidao.jpg", // 你的图片路径
+    alt: "氧气味道",
+    description: "又来喝氧气味道了，真好喝",
+    date: "2025年06月25日",
+  },
+  {
+    src: "/image/gallery_biye/pig.jpg", // 你的图片路径
+    alt: "小猪",
+    description: "收拾东西发现一只可爱的小猪，之前在楼下CBD吃饭送的",
+    date: "2025年06月25日",
+  },
+  {
+    src: "/image/gallery_biye/suannai.jpg", // 你的图片路径
+    alt: "酸奶",
+    description: "一起去珞珈山庄喝了酸奶，了却一个愿望",
+    date: "2025年06月26日",
+  },
+  {
+    src: "/image/gallery_biye/cats.jpg", // 你的图片路径
+    alt: "小猫",
+    description: "左边的喵好孤独",
+    date: "2025年06月26日",
+  },
+  {
+    src: "/image/gallery_biye/donghu.jpg", // 你的图片路径
+    alt: "东湖",
+    description: "再来东湖看看吧",
+    date: "2025年06月26日",
+  },
+  {
+    src: "/image/gallery_biye/songbieliwei.jpg", // 你的图片路径
+    alt: "送别李威",
+    description: "送别李威，此后的每一天都在送别",
+    date: "2025年06月27日",
+  },
+  {
+    src: "/image/gallery_biye/qiaokeli.jpg", // 你的图片路径
+    alt: "巧克力馆",
+    description: "和徐毅豪在巧克力馆转转",
+    date: "2025年06月27日",
+  },
+  {
+    src: "/image/gallery_biye/jianghanlu.jpg", // 你的图片路径
+    alt: "江汉路",
+    description: "别了，江汉路",
+    date: "2025年06月27日",
+  },
+  {
+    src: "/image/gallery_biye/songbiefan.jpg", // 你的图片路径
+    alt: "东北菜最后一顿",
+    description: "和徐毅豪吃的最后一顿东北菜，点了他最爱吃的溜肉段",
+    date: "2025年06月28日",
+  },
+  {
+    src: "/image/gallery_biye/mengkaishidedifang.jpg", // 你的图片路径
+    alt: "梦开始的地方",
+    description: "我们回到了教五303，梦开始的地方，在此写下毕业快乐",
+    date: "2025年06月28日",
+  },
+  {
+    src: "/image/gallery_biye/xyh.jpg", // 你的图片路径
+    alt: "徐毅豪和他的WHU",
+    description: "Albert. Xu和他的WHU",
+    date: "2025年06月28日",
+  },
+  {
+    src: "/image/gallery_biye/qinshihezhao.jpg", // 你的图片路径
+    alt: "寝室合照",
+    description: "在徐毅豪宿舍拍下最后的合照",
+    date: "2025年06月28日",
+  },
+  {
+    src: "/image/gallery_biye/xyhqlj.jpg", // 你的图片路径
+    alt: "xyhqlj",
+    description: "雨很大，齐良骏去送徐毅豪离开，此后希望我们还能相聚",
+    date: "2025年06月29日",
+  },
+  {
+    src: "/image/gallery_biye/zuihoudewuyuan.jpg", // 你的图片路径
+    alt: "最后的物院",
+    description: "最后再来物院看一看，真的要走了......",
+    date: "2025年06月29日",
+  },
+  {
+    src: "/image/gallery_biye/wanlinlouding.jpg", // 你的图片路径
+    alt: "万林楼顶",
+    description: "在万林楼顶再看一看武大，我武美得像梦一样",
+    date: "2025年06月29日",
+  },
+  {
+    src: "/image/gallery_biye/fengyuanlukou.jpg", // 你的图片路径
+    alt: "枫园路口",
+    description: "这个路口不知走了多少遍......",
+    date: "2025年06月29日",
+  },
+  {
+    src: "/image/gallery_biye/zuihoudezaoshang.jpg", // 你的图片路径
+    alt: "最后的早上",
+    description: "在武大的最后一个早上了，舍不得",
+    date: "2025年06月30日",
+  },
+  {
+    src: "/image/gallery_biye/laotu.jpg", // 你的图片路径
+    alt: "老图书馆",
+    description: "再见，老图书馆",
+    date: "2025年06月30日",
+  },
+  {
+    src: "/image/gallery_biye/yingding.jpg", // 你的图片路径
+    alt: "樱顶",
+    description: "再见，樱顶",
+    date: "2025年06月30日",
+  },
+  {
+    src: "/image/gallery_biye/608.jpg", // 你的图片路径
+    alt: "608",
+    description: "再见，我的608",
+    date: "2025年06月30日",
+  },
+  {
+    src: "/image/gallery_biye/fengyuanyishe.jpg", // 你的图片路径
+    alt: "枫园一舍",
+    description: "再见，枫园一舍",
+    date: "2025年06月30日",
+  },
+  {
+    src: "/image/gallery_biye/zaijianwhu.jpg", // 你的图片路径
+    alt: "再见武大",
+    description: "再见了，我的WHU。有空我一定回来看你",
+    date: "2025年06月30日",
+  },
+  {
+    src: "/image/gallery_biye/biye1.jpg", // 你的图片路径
+    alt: "毕业1",
+    description: "毕业季",
+    date: "最好的我们",
+  },
+  {
+    src: "/image/gallery_biye/biye2.jpg", // 你的图片路径
+    alt: "毕业2",
+    description: "毕业季",
+    date: "最好的我们",
+  },
+  {
+    src: "/image/gallery_biye/biye3.jpg", // 你的图片路径
+    alt: "毕业3",
+    description: "毕业季",
+    date: "最好的我们",
+  },
+  {
+    src: "/image/gallery_biye/biye4.jpg", // 你的图片路径
+    alt: "毕业4",
+    description: "毕业季",
+    date: "最好的我们",
+  },
+  {
+    src: "/image/gallery_biye/biye5.jpg", // 你的图片路径
+    alt: "毕业5",
+    description: "毕业季",
+    date: "最好的我们",
+  },
+  {
+    src: "/image/gallery_biye/biye6.jpg", // 你的图片路径
+    alt: "毕业6",
+    description: "毕业季",
+    date: "最好的我们",
+  },
+  {
+    src: "/image/gallery_biye/biye7.jpg", // 你的图片路径
+    alt: "毕业7",
+    description: "毕业季",
+    date: "最好的我们",
+  },
+  {
+    src: "/image/gallery_biye/biye8.jpg", // 你的图片路径
+    alt: "毕业8",
+    description: "毕业季",
+    date: "最好的我们",
+  },
+  {
+    src: "/image/gallery_biye/biye9.jpg", // 你的图片路径
+    alt: "毕业9",
+    description: "毕业季",
+    date: "最好的我们",
+  },
+  // 添加更多你的图片数据
+  // {
+  //   src: "/image/gallery/your-other-image.png",
+  //   alt: "其他图片",
+  //   description: "这张图片是关于...",
+  //   date: "YYYY年MM月DD日",
+  // },
+];
+---
+
+<BaseLayout title="Moments">
+  <MainCard
+    title="Moments"
+    description="Where moments pause, and stories unfold."
+    infoIcon="lucide:link"
+  >
+    <div class="gallery-container">
+      {photos.map((photo, index) => (
+        <div class="gallery-item">
+          {/* SimpleLightbox 推荐图片被 <a> 标签包裹，href 指向大图 */}
+          <a href={photo.src} class="simple-lightbox-item" data-title={`${photo.description} <br> ${photo.date}`}>
+            <img src={photo.src} alt={photo.alt} loading="lazy" />
+          </a>
+          <div class="image-overlay">
+            <p class="image-description">{photo.description}</p>
+            <p class="image-date">{photo.date}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </MainCard>
+</BaseLayout>
+
+{/* ⚡️ 移除或注释掉你之前所有的模态框 HTML 结构：
+  <div id="image-modal" class="modal">...</div> 
+*/}
+
+{/* ⚡️ SimpleLightbox 的初始化脚本 ⚡️
+  需要放在页面底部，确保 DOM 元素已经加载
+*/}
+<script type="module" is:inline>
+  // 从 'simple-lightbox' 导入 SimpleLightbox
+  import SimpleLightbox from 'simple-lightbox';
+
+  // 定义初始化函数，确保 SimpleLightbox 在 DOM 加载或页面导航后运行
+  function initializeSimpleLightbox() {
+    // 选中所有带有 'simple-lightbox-item' 类的 <a> 标签
+    // data-title 属性将作为图片下方显示的标题和日期
+    const gallery = new SimpleLightbox('.simple-lightbox-item', {
+      captionDelay: 0, // 标题显示延迟
+      fadeSpeed: 300,  // 淡入淡出速度
+      animationSpeed: 200, // 切换动画速度
+      history: false, // 禁用历史记录，避免与 Astro 路由冲突
+      // navigation: false, // 如果你不想显示左右箭头
+       close: true, // 如果你不想显示关闭按钮
+       closeOnOverlayClick: true
+      // showCounter: false, // 如果你不想显示图片计数 (1/5)
+      // navText: ['&#x2190;', '&#x2192;'], // 自定义导航箭头
+      // 其他配置选项请查阅 SimpleLightbox 官方文档
+    });
+
+    // 可以在这里添加一些事件监听，例如图片加载完成后的回调
+    // gallery.on('show.simplelightbox', function(){
+    //   console.log('Lightbox is showing');
+    // });
+  }
+
+  // 确保在 Astro 页面加载完成后初始化 SimpleLightbox
+  document.addEventListener('astro:page-load', initializeSimpleLightbox);
+
+  // 如果你的项目使用 Astro View Transitions (客户端路由)，
+  // 还需要在每次客户端导航后重新初始化，以确保新加载的图片也能被识别
+  document.addEventListener('astro:after-swap', initializeSimpleLightbox);
+</script>
+
+<style lang="scss">
+
+/* --- 你的所有照片墙图片及容器样式 (保持不变) --- */
+.gallery-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 25px;
+  padding: 10px;
+}
+
+.gallery-item {
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  cursor: pointer;
+  background-color: #fff;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+  }
+
+  /* ⚡️ 关键改动：gallery-item img 尺寸不变，但现在被 <a> 包裹 ⚡️ */
+  img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    display: block;
+    border-radius: 8px 8px 0 0;
+    transition: transform 0.3s ease-in-out;
+  }
+  &:hover img {
+    transform: scale(1.08);
+  }
+
+  /* ⚡️ SimpleLightbox 相关的 CSS 已经由库自身提供，
+    你不需要在这里编写模态框的 .modal, .modal-content 等样式。
+    你只需确保你的 .simple-lightbox-item <a> 标签覆盖了整个图片，
+    以便用户点击图片即可触发 Lightbox。
+  */
+  .simple-lightbox-item {
+    display: block; /* 确保 <a> 标签占据空间 */
+    line-height: 0; /* 移除可能的行高影响 */
+  }
+
+  .image-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.75);
+    color: white;
+    padding: 15px 10px;
+    box-sizing: border-box;
+    transform: translateY(100%);
+    transition: transform 0.3s ease-in-out;
+    border-radius: 0 0 8px 8px;
+  }
+  &:hover .image-overlay {
+    transform: translateY(0);
+  }
+
+  .image-description {
+    margin: 0;
+    font-size: 0.95em;
+    text-align: center;
+    line-height: 1.4;
+  }
+
+  .image-date {
+    margin-top: 5px;
+    font-size: 0.8em;
+    color: rgba(255, 255, 255, 0.7);
+    text-align: center;
+  }
+}
+/* --- 你的所有照片墙图片及容器样式 (保持不变) --- */
+/* ... 现有样式 ... */
+
+/* ⚡️ 强制显示和美化 SimpleLightbox 的关闭按钮 ⚡️ */
+.sl-close {
+  position: fixed !important; /* 确保它固定在视口 */
+  top: 20px !important;       /* 距离顶部 20px */
+  right: 20px !important;      /* 距离右侧 20px */
+  font-size: 3em !important;   /* 字体放大到 3 倍，非常显眼 */
+  color: #c31c1c !important;      /* 纯白色，确保在深色背景上突出 */
+  text-shadow: 0 0 8px rgba(0, 0, 0, 0.8) !important; /* 添加深色阴影，增加对比度 */
+  opacity: 1 !important;       /* 确保完全不透明 */
+  cursor: pointer !important;  /* 鼠标悬停显示手型光标 */
+  z-index: 1000000 !important; /* 确保在所有内容之上 */
+}
+
+/* ⚡️ 确保背景可点击关闭 ⚡️ */
+/* SimpleLightbox 的背景元素通常是 .sl-overlay 或类似的类 */
+/* 如果点击背景无法关闭，有时是因为背景被其他透明元素覆盖或 z-index 问题 */
+/* 尽管 SimpleLightbox 库通常会处理好，但如果遇到问题，可以添加以下样式 */
+/* .sl-overlay {
+  z-index: 999999 !important; /* 确保背景在内容之下但在关闭按钮之下
+  pointer-events: auto !important; /* 确保能接收点击事件
+} */
+</style>
