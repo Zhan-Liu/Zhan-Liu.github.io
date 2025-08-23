@@ -34,6 +34,11 @@ site:
           href: /blog
           svg: "material-symbols:ink-pen-outline-rounded"
           target: _self
+        - id: Memory
+          text: Memory
+          href: /blog/category/Memory
+          svg: "lucide:snowflake"
+          target: _self
         - id: Physics
           text: Physics
           href: /blog/category/Physics
@@ -43,11 +48,6 @@ site:
           text: Codes
           href: /blog/category/Codes
           svg: "material-symbols:keyboard"
-          target: _self
-        - id: Memory
-          text: Memory
-          href: /blog/category/Memory
-          svg: "lucide:snowflake"
           target: _self
         # 子菜单项配置
     - id: gallery # 照片墙的唯一标识符
