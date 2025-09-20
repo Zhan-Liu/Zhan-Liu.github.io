@@ -1,0 +1,276 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import MainCard from "@/components/MainCard.astro";
+
+// 导入 SimpleLightbox 的 CSS
+import 'simple-lightbox/dist/simpleLightbox.min.css';
+
+const photos = [
+  {
+    src: "/image/gallery_boyi/luqutongzhishu.jpg", // 你的图片路径
+    alt: "录取通知书",
+    description: "物理所的录取通知书终于到了，开心~",
+    date: "2025年07月06日",
+  },
+  {
+    src: "/image/gallery_boyi/huiyizhong.jpg", // 你的图片路径
+    alt: "回一中",
+    description: "和芃芃还有嘉琦回一中看了化学老师和英语老师，这么多年了，一中还是那个一中",
+    date: "2025年07月12日",
+  },
+  {
+    src: "/image/gallery_boyi/bayuediyidunfan.jpg", // 你的图片路径
+    alt: "八月份的第一顿饭",
+    description: "八月的第一顿饭，芃芃做的非常丰盛",
+    date: "2025年08月01日",
+  },
+  {
+    src: "/image/gallery_boyi/jiaqixiaofendui.jpg", // 你的图片路径
+    alt: "假期play小分队的第一次聚餐",
+    description: "假期play小分队的第一次聚餐",
+    date: "2025年08月09日",
+  },
+  {
+    src: "/image/gallery_boyi/kafei.jpg", // 你的图片路径
+    alt: "开吃开喝",
+    description: "和王嘉琦开吃开喝开玩",
+    date: "2025年08月09日",
+  },
+  {
+    src: "/image/gallery_boyi/jiweijiu.jpg", // 你的图片路径
+    alt: "鸡尾酒",
+    description: "此时的两个人已经准备通宵了",
+    date: "2025年08月09日",
+  },
+  {
+    src: "/image/gallery_boyi/langlangshan.jpg", // 你的图片路径
+    alt: "浪浪山小妖怪",
+    description: "浪浪山小妖怪~昨晚几乎通宵的两个人早起看电影......",
+    date: "2025年08月10日",
+  },
+  {
+    src: "/image/gallery_boyi/ganbei.jpg", // 你的图片路径
+    alt: "干杯",
+    description: "一起干杯！",
+    date: "2025年08月18日",
+  },
+  {
+    src: "/image/gallery_boyi/qingchifan.jpg", // 你的图片路径
+    alt: "请吃饭",
+    description: "芃芃要走了，请他一起吃顿饭",
+    date: "2025年08月18日",
+  },
+  {
+    src: "/image/gallery_boyi/xiaogou.jpg", // 你的图片路径
+    alt: "小狗",
+    description: "一只小狗~",
+    date: "2025年08月24日",
+  },
+  {
+    src: "/image/gallery_boyi/kaixuela.jpg", // 你的图片路径
+    alt: "开学啦",
+    description: "开学啦~国科大的第一眼",
+    date: "2025年09月11日",
+  },
+  {
+    src: "/image/gallery_boyi/kexueyuyishudalou.jpg", // 你的图片路径
+    alt: "科学与艺术大楼",
+    description: "科学与艺术大楼，开学第一周的周一来这里自习",
+    date: "2025年09月13日",
+  },
+  {
+    src: "/image/gallery_boyi/huoche.jpg", // 你的图片路径
+    alt: "火车",
+    description: "坐小火车进城了，比坐班车舒服多了......",
+    date: "2025年09月20日",
+  },
+  {
+    src: "/image/gallery_boyi/yuanmingyuan.jpg", // 你的图片路径
+    alt: "圆明园",
+    description: "圆明园免费，四个人逛得要累死了，我还带错了路，嘿嘿",
+    date: "2025年09月20日",
+  },
+  {
+    src: "/image/gallery_boyi/xuegao.jpg", // 你的图片路径
+    alt: "圆明园雪糕",
+    description: "买了圆明园的雪糕，为什么大哥和嘉琦的上面有字......",
+    date: "2025年09月20日",
+  },
+  // 添加更多你的图片数据
+  // {
+  //   src: "/image/gallery/your-other-image.png",
+  //   alt: "其他图片",
+  //   description: "这张图片是关于...",
+  //   date: "YYYY年MM月DD日",
+  // },
+];
+---
+
+<BaseLayout title="Moments">
+  <MainCard
+    title="Moments"
+    description="Where moments pause, and stories unfold."
+    infoIcon="lucide:link"
+  >
+    <div class="gallery-container">
+      {photos.map((photo, index) => (
+        <div class="gallery-item">
+          {/* SimpleLightbox 推荐图片被 <a> 标签包裹，href 指向大图 */}
+          <a href={photo.src} class="simple-lightbox-item" data-title={`${photo.description} <br> ${photo.date}`}>
+            <img src={photo.src} alt={photo.alt} loading="lazy" />
+          </a>
+          <div class="image-overlay">
+            <p class="image-description">{photo.description}</p>
+            <p class="image-date">{photo.date}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </MainCard>
+</BaseLayout>
+
+{/* ⚡️ 移除或注释掉你之前所有的模态框 HTML 结构：
+  <div id="image-modal" class="modal">...</div> 
+*/}
+
+{/* ⚡️ SimpleLightbox 的初始化脚本 ⚡️
+  需要放在页面底部，确保 DOM 元素已经加载
+*/}
+<script type="module" is:inline>
+  // 从 'simple-lightbox' 导入 SimpleLightbox
+  import SimpleLightbox from 'simple-lightbox';
+
+  // 定义初始化函数，确保 SimpleLightbox 在 DOM 加载或页面导航后运行
+  function initializeSimpleLightbox() {
+    // 选中所有带有 'simple-lightbox-item' 类的 <a> 标签
+    // data-title 属性将作为图片下方显示的标题和日期
+    const gallery = new SimpleLightbox('.simple-lightbox-item', {
+      captionDelay: 0, // 标题显示延迟
+      fadeSpeed: 300,  // 淡入淡出速度
+      animationSpeed: 200, // 切换动画速度
+      history: false, // 禁用历史记录，避免与 Astro 路由冲突
+      // navigation: false, // 如果你不想显示左右箭头
+       close: true, // 如果你不想显示关闭按钮
+       closeOnOverlayClick: true
+      // showCounter: false, // 如果你不想显示图片计数 (1/5)
+      // navText: ['&#x2190;', '&#x2192;'], // 自定义导航箭头
+      // 其他配置选项请查阅 SimpleLightbox 官方文档
+    });
+
+    // 可以在这里添加一些事件监听，例如图片加载完成后的回调
+    // gallery.on('show.simplelightbox', function(){
+    //   console.log('Lightbox is showing');
+    // });
+  }
+
+  // 确保在 Astro 页面加载完成后初始化 SimpleLightbox
+  document.addEventListener('astro:page-load', initializeSimpleLightbox);
+
+  // 如果你的项目使用 Astro View Transitions (客户端路由)，
+  // 还需要在每次客户端导航后重新初始化，以确保新加载的图片也能被识别
+  document.addEventListener('astro:after-swap', initializeSimpleLightbox);
+</script>
+
+<style lang="scss">
+
+/* --- 你的所有照片墙图片及容器样式 (保持不变) --- */
+.gallery-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 25px;
+  padding: 10px;
+}
+
+.gallery-item {
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  cursor: pointer;
+  background-color: #fff;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+  }
+
+  /* ⚡️ 关键改动：gallery-item img 尺寸不变，但现在被 <a> 包裹 ⚡️ */
+  img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    display: block;
+    border-radius: 8px 8px 0 0;
+    transition: transform 0.3s ease-in-out;
+  }
+  &:hover img {
+    transform: scale(1.08);
+  }
+
+  /* ⚡️ SimpleLightbox 相关的 CSS 已经由库自身提供，
+    你不需要在这里编写模态框的 .modal, .modal-content 等样式。
+    你只需确保你的 .simple-lightbox-item <a> 标签覆盖了整个图片，
+    以便用户点击图片即可触发 Lightbox。
+  */
+  .simple-lightbox-item {
+    display: block; /* 确保 <a> 标签占据空间 */
+    line-height: 0; /* 移除可能的行高影响 */
+  }
+
+  .image-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.75);
+    color: white;
+    padding: 15px 10px;
+    box-sizing: border-box;
+    transform: translateY(100%);
+    transition: transform 0.3s ease-in-out;
+    border-radius: 0 0 8px 8px;
+  }
+  &:hover .image-overlay {
+    transform: translateY(0);
+  }
+
+  .image-description {
+    margin: 0;
+    font-size: 0.95em;
+    text-align: center;
+    line-height: 1.4;
+  }
+
+  .image-date {
+    margin-top: 5px;
+    font-size: 0.8em;
+    color: rgba(255, 255, 255, 0.7);
+    text-align: center;
+  }
+}
+/* --- 你的所有照片墙图片及容器样式 (保持不变) --- */
+/* ... 现有样式 ... */
+
+/* ⚡️ 强制显示和美化 SimpleLightbox 的关闭按钮 ⚡️ */
+.sl-close {
+  position: fixed !important; /* 确保它固定在视口 */
+  top: 20px !important;       /* 距离顶部 20px */
+  right: 20px !important;      /* 距离右侧 20px */
+  font-size: 3em !important;   /* 字体放大到 3 倍，非常显眼 */
+  color: #c31c1c !important;      /* 纯白色，确保在深色背景上突出 */
+  text-shadow: 0 0 8px rgba(0, 0, 0, 0.8) !important; /* 添加深色阴影，增加对比度 */
+  opacity: 1 !important;       /* 确保完全不透明 */
+  cursor: pointer !important;  /* 鼠标悬停显示手型光标 */
+  z-index: 1000000 !important; /* 确保在所有内容之上 */
+}
+
+/* ⚡️ 确保背景可点击关闭 ⚡️ */
+/* SimpleLightbox 的背景元素通常是 .sl-overlay 或类似的类 */
+/* 如果点击背景无法关闭，有时是因为背景被其他透明元素覆盖或 z-index 问题 */
+/* 尽管 SimpleLightbox 库通常会处理好，但如果遇到问题，可以添加以下样式 */
+/* .sl-overlay {
+  z-index: 999999 !important; /* 确保背景在内容之下但在关闭按钮之下
+  pointer-events: auto !important; /* 确保能接收点击事件
+} */
+</style>

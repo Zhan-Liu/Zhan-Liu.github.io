@@ -81,6 +81,11 @@ site:
           href: /gallerybiye
           svg: "material-symbols:blur-on"
           target: _self
+        - id: 2025.07-2026.02
+          text: 博一
+          href: /galleryboyi
+          svg: "material-symbols:blur-on"
+          target: _self
         # 子菜单项配置
     - id: publication
       text: Publication
