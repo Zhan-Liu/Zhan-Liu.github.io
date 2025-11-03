@@ -1,5 +1,5 @@
 ---
-title: Follow your heart, and be pure: 写在课题一周年
+title: Follow your heart, and be pure： 写在课题一周年
 description: 我的课题一岁啦
 pubDate: 03 11 2025
 image: /image/one-year-project.jpg
