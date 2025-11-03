@@ -4,7 +4,6 @@ description: 我的课题一岁啦
 pubDate: 03 11 2025
 image: /image/one-year-project.jpg
 categories:
-  - Physics
   - Memory
 tags:
   - 日常科研
