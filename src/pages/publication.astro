@@ -13,20 +13,47 @@ import RepositoryCard from "@/components/mdx/RepositoryCard.astro";
     infoIcon="lucide:code-2"
   >
     <!-- Featured Projects -->
-    <section class="py-4">
-      <h2 class="text-2xl font-bold mb-6 flex items-center gap-2">
-        <Icon name="lucide:bookmark" class="w-6 h-6 text-primary" />
-        <span>non-Hermitian Physics</span>
-      </h2>
-      <ol class="text-base-content/80 mb-6 list-decimal pl-4">   
-        <li>
-         I hope two papers about non-Hermitian Bloch oscillation will be published soon......
-         My first paper about non-Hermitian Bloch oscillation has been published in Physical Review B as a Letter.
-         Twinkling Bloch Oscillation in anti-Hermitian Lattices
-        </li>
-      </ol>
-      
-    </section>
+    <!-- Publications -->
+<section class="py-4">
+  <h2 class="text-2xl font-bold mb-6 flex items-center gap-2">
+    <Icon name="lucide:bookmark" class="w-6 h-6 text-primary" />
+    <span>Non-Hermitian Physics</span>
+  </h2>
+
+  <p class="text-base-content/80 mb-6">
+    My first paper on non-Hermitian Bloch oscillations has been
+    published as a Letter in <em>Physical Review B</em>.
+  </p>
+
+  <ol class="text-base-content/80 mb-4 list-decimal pl-5 space-y-6">
+    <li class="pl-1">
+      <a
+        href="https://doi.org/10.1103/1lwg-9lyw"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="text-lg font-semibold text-primary hover:underline"
+      >
+        Twinkling Bloch oscillation in anti-Hermitian lattices
+      </a>
+
+      <p class="mt-2">
+        Xiling Feng<sup>*</sup>,
+        <strong class="text-base-content">Zhan Liu</strong><sup>*</sup>,
+        Kuoxi Zhang, Shuaishuai Tong, Qicheng Zhang, and Chunyin Qiu
+      </p>
+
+      <p class="mt-1">
+        <em>Physical Review B</em>
+        <strong>114</strong>, L260301 (2026).
+        <span class="badge badge-outline badge-sm ml-2">Letter</span>
+      </p>
+    </li>
+  </ol>
+
+  <p class="text-sm text-base-content/60">
+    <sup>*</sup> Equal contribution.
+  </p>
+</section>
 
     <!-- My Repositories -->
      <section class="py-4">
