@@ -9,7 +9,7 @@ import RepositoryCard from "@/components/mdx/RepositoryCard.astro";
 <BaseLayout title="Publications">
   <MainCard
     title="Publications"
-    description="Published Paper"
+    description="Journal articles and preprints"
     infoIcon="lucide:code-2"
   >
     <!-- Featured Projects -->
@@ -55,14 +55,37 @@ import RepositoryCard from "@/components/mdx/RepositoryCard.astro";
   </p>
 </section>
 
-    <!-- My Repositories -->
-     <section class="py-4">
+    <!-- Magnetism -->
+    <section id="magnetism" class="py-4">
       <h2 class="text-2xl font-bold mb-6 flex items-center gap-2">
         <Icon name="lucide:bookmark" class="w-6 h-6 text-primary" />
         <span>Magnetism</span>
       </h2>
-      <ol class="text-base-content/80 mb-6 list-decimal pl-4">   
-      </ol>      
+      <ol class="text-base-content/80 mb-4 list-decimal pl-5 space-y-6">
+        <li class="pl-1">
+          <a
+            href="https://arxiv.org/abs/2611.15141"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-lg font-semibold text-primary hover:underline"
+          >
+            Magnetism on emergent molecular-orbital lattices
+          </a>
+
+          <p class="mt-2">
+            <strong class="text-base-content">Zhan Liu</strong><sup>*</sup>,
+            Chenrui Wang<sup>*</sup>, and Chen Fang
+          </p>
+
+          <p class="mt-1">
+            arXiv:2611.15141 [cond-mat.str-el] (2026).
+            <span class="badge badge-outline badge-sm ml-2">Preprint</span>
+          </p>
+        </li>
+      </ol>
+      <p class="text-sm text-base-content/60">
+        <sup>*</sup> Equal contribution.
+      </p>
     </section>
   </MainCard>
 </BaseLayout>
